@@ -73,8 +73,9 @@ function h_init() {
 	if (typeof interval !== 'undefined') {h_debug("Stopping interval");h_stop()}
 
 	console.info("Loading: CSS")
-	styleSheet = document.createElement("style")
-	styleSheet.type = "text/css"
+	styleSheet = document.createElement("link")
+	styleSheet.rel = "stylesheet"
+	styleSheet.href = "text/css"
 	styleSheet.innerText = `
 #h_menu {
 	left: 0;
