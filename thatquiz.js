@@ -69,41 +69,20 @@ function h_init() {
 	isinfinite = false
 
 	console.clear()
-	console.info("Initiating hack..")
+	console.info("Initiating..")
 	if (typeof interval !== 'undefined') {h_debug("Stopping interval");h_stop()}
 
-	console.info("Loading: CSS")
-	styleSheet = document.createElement("link")
-	styleSheet.rel = "stylesheet"
-	styleSheet.href = "text/css"
-	styleSheet.innerText = `
-#h_menu {
-	left: 0;
-	right: 0;
-	bottom: 0;
-	position: fixed;
-	background-color: #404040;
-	padding: 15px;
-	z-index: 1000;
-}
-#h_menu > div {
-    max-width: 600px; /* just for example */
-    margin: 0 auto;
-}
-`
-	document.head.appendChild(styleSheet)
-
-	console.info("Loading: GUI")
-	h_menu = document.createElement("div")
-	h_menu.id = "h_menu"
-	h_menu.innerHTML = `
-	<div class="h_container">
-		<input id="h_value_max">
-		<input id="h_value_min">
-		<button id="h_btn_apply">
-		<button id="h_btn_reset">
-	</div>
+	html = `
+<div id="h_menu">
+	<link rel="stylesheet" href="https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/css.css">
+	<div class="container">
+		<input id="value_max">
+		<input id="value_min">
+		<button id="btn_apply">
+		<button id="btn_reset">
+	</button>
+</div>
 	`
-	document.body.appendChild(h_menu)
+	$("body").append(html)
 }
 h_init()
