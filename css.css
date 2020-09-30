@@ -1,0 +1,13 @@
+#h_menu {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: fixed;
+	background-color: #404040;
+	padding: 15px;
+	z-index: 1000;
+}
+#h_menu > div {
+	max-width: 600px; /* just for example */
+	margin: 0 auto;
+}
