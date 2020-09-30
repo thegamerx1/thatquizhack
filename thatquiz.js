@@ -1,11 +1,21 @@
-function random(min, max) { return parseInt(Math.random() * (max - min) + min)}
+function random(min, max) {return parseInt(Math.random() * (max - min) + min)}
 
 var h_data = {}
-h_data.started = false
 
 function h_stop() {
 	console.info("Done")
 	h_data.running = false
+}
+
+function h_random() {
+	return random(h_data.min, h_data.max)
+}
+
+function h_request(url) {
+	var xmlHttp = new XMLHttpRequest()
+	xmlHttp.open("GET", url, false)
+	xmlHttp.send(null)
+	return xmlHttp.responseText
 }
 
 function h_next() {
@@ -13,8 +23,8 @@ function h_next() {
 	wrong = $("#q91a").value
 	total = parseInt(right, 10)+parseInt(wrong, 10)
 
-	inputtohack = $("input#C")
-	if (inputtohack == null) {
+	input = $("input#C")
+	if (input == null) {
 		h_stop()
 		return
 	}
@@ -27,9 +37,10 @@ function h_next() {
 		hackit = hackit.replace('–', "-") //Substraction
 	}
 
-	hackit = eval(hackit)
-	inputtohack.value = hackit
+	out = eval(hackit)
+	input.value = out
 	arithmetic.v86()
+	console.info(out)
 
 	// wrong + right = lenght
 	if (+total+1 >= +h_data.lenght && !h_data.isinfinite) {
@@ -39,8 +50,9 @@ function h_next() {
 
 	randoms = h_random()
 	if (randoms !== 0) {
-		console.info("Waiting "+randoms+" ms..")
+		console.info("Waiting "+randoms+"ms..")
 	}
+
 	setTimeout(h_next,randoms)
 }
 
@@ -58,17 +70,6 @@ function h_apply() {
 	$("#h_menu").remove()
 	console.info("starting")
 	setTimeout(h_next, 100)
-}
-
-function h_random() {
-	return random(h_data.min, h_data.max)
-}
-
-function h_request(url) {
-	var xmlHttp = new XMLHttpRequest()
-	xmlHttp.open("GET", url, false)
-	xmlHttp.send(null)
-	return xmlHttp.responseText
 }
 
 function h_init() {
