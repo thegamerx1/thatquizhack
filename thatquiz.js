@@ -1,16 +1,21 @@
-function random(min, max) {return Math.random() * (max - min) + min}
-function sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms))}
-function h_debug(arg) {if(debug){console.debug(arg)}}
-function h_stop() {finished = true}
+function random(min, max) { return parseInt(Math.random() * (max - min) + min)}
 
-async function h_next() {
-	right = document.getElementById("q917").value
-	wrong = document.getElementById("q91a").value
+var h_data = {}
+h_data.started = false
+
+function h_stop() {
+	console.info("Done")
+	h_data.running = false
+}
+
+function h_next() {
+	right = $("#q917").value
+	wrong = $("#q91a").value
 	total = parseInt(right, 10)+parseInt(wrong, 10)
 
-	inputtohack = document.querySelector("input#C")
+	inputtohack = $("input#C")
 	if (inputtohack == null) {
-		console.info("Done")
+		h_stop()
 		return
 	}
 
@@ -22,67 +27,46 @@ async function h_next() {
 		hackit = hackit.replace('–', "-") //Substraction
 	}
 
-	hackit = math.evaluate(hackit)
+	hackit = eval(hackit)
 	inputtohack.value = hackit
 	arithmetic.v86()
 
-	if (+total+1 >= +lenght && !isinfinite) {
-		h_debug("Done")
-		finished = true
+	// wrong + right = lenght
+	if (+total+1 >= +h_data.lenght && !h_data.isinfinite) {
+		h_stop()
 		return
 	}
 
-	if (maxdelay != 0 && !finished) {
-		randoms = parseInt(random(mindelay,maxdelay))
-		h_debug("Waiting "+randoms+" ms..")
-		setTimeout(h_next,randoms)
-		return
-	}
-
-	if ((isinfinite && !finished) || (maxdelay == 0 && !finished)) {
-		setTimeout(h_next,0)
-		return
-	}
+	randoms = h_random()
+	console.info("Waiting "+randoms+" ms..")
+	setTimeout(h_next,randoms)
 }
 
-function h_start() {
-	console.info("Starting hack..")
-	button = document.getElementById("OK")
-	lenght = document.getElementById("TESTLENGTH").value
-	if (lenght == 101) {
-		isinfinite = true
-		lenght = "Open"
-	}
-	h_debug("Lenght: "+lenght)
+function h_apply() {
+	form = document.forms["h_form"]
+	h_data.running = true
+	h_data.min = form["h_value_min"].value
+	h_data.max = form["h_value_max"].value
 
-	h_next()
+	h_data.button = $("#OK")
+	h_data.lenght = $("#TESTLENGTH").value
+	if (h_data.lenght == 101) {
+		h_data.isinfinite = true
+	}
+	$("#h_menu").remove()
+	console.info("starting")
+	setTimeout(h_next, 100)
+}
+
+function h_random() {
+	return random(h_data.min, h_data.max)
 }
 
 function h_init() {
-	debug = true // Displays messages in console
-	mindelay = 250 // Minimum delay between inputs
-	maxdelay = 0 // Maximum delay between inputs, Set to 0 to disable delays
+	console.info("Creating menu")
 
-	// Do Not Change
-	finished = false
-	randoms = 0
-	isinfinite = false
-
-	console.clear()
-	console.info("Initiating..")
-	if (typeof interval !== 'undefined') {h_debug("Stopping interval");h_stop()}
-
-	html = `
-<div id="h_menu">
-	<link rel="stylesheet" href="https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/css.css">
-	<div class="container">
-		<input id="value_max">
-		<input id="value_min">
-		<button id="btn_apply">
-		<button id="btn_reset">
-	</button>
-</div>
-	`
-	$("body").append(html)
+	var html = '<div id="h_menu"><link rel="stylesheet" href="http://127.0.0.1:5500/css.css"><div class="container"><form name="h_form"><label for="h_value_min">Min Delay:</label><input type="text" id="h_value_min" name="h_value_min" value="3000">ms<label for="h_value_max">Max Delay:</label><input type="text" id="h_value_max" name="h_value_max" value="10000">ms<button type="button" onclick="h_apply()">OK</button></form></button></div>'
+	html = document.createRange().createContextualFragment(html)
+	document.body.appendChild(html)
 }
 h_init()
