@@ -1,4 +1,5 @@
-## ThatQuiz Hack
+# Note
+html is compressed inside the `thatquiz.js` file
 
 # Instructions
 
