@@ -38,7 +38,9 @@ function h_next() {
 	}
 
 	randoms = h_random()
-	console.info("Waiting "+randoms+" ms..")
+	if (randoms !== 0) {
+		console.info("Waiting "+randoms+" ms..")
+	}
 	setTimeout(h_next,randoms)
 }
 
@@ -62,11 +64,28 @@ function h_random() {
 	return random(h_data.min, h_data.max)
 }
 
+function h_request(url) {
+	var xmlHttp = new XMLHttpRequest()
+	xmlHttp.open("GET", url, false)
+	xmlHttp.send(null)
+	return xmlHttp.responseText
+}
+
 function h_init() {
+	islocal = false
 	console.info("Creating menu")
 
-	var html = '<div id="h_menu"><link rel="stylesheet" type="text/plain" href="https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/css.css"><div class="container"><form name="h_form"><label for="h_value_min">Min Delay:</label><input type="text" id="h_value_min" name="h_value_min" value="3000">ms<label for="h_value_max">Max Delay:</label><input type="text" id="h_value_max" name="h_value_max" value="10000">ms<button type="button" onclick="h_apply()">OK</button><p class="int">Set values to 0 for instant or leave them like its for realistic inputs</p><p class="who">Made by TheGamerX38<br><a href="https://github.com/thegamerx1/thatquizhack" target="_blank">github</a><a href="https://t.me/TheGamerX38" target="_blank">telegram</a></p></form></div></div>'
+	if (islocal) {
+		html = h_request("http://127.0.0.1:5500/html.html")
+		css = h_request("http://127.0.0.1:5500/css.css")
+	} else {
+		html = h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/html.html")
+		css = h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/css.css")
+	}
 	html = document.createRange().createContextualFragment(html)
 	document.body.appendChild(html)
+	style = document.createElement("style")
+	style.innerHTML = css
+	document.getElementById("h_menu").prepend(style)
 }
 h_init()
