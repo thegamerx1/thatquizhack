@@ -28,12 +28,9 @@ function h_next() {
 		return
 	}
 
-	right = $("#q917").value
-	wrong = $("#q91a").value
-	total = parseInt(right, 10)+parseInt(wrong, 10)
-
-	input = $("input#C")
-	if (input == null) {
+	total = parseInt(h_data.right.value, 10) + parseInt(h_data.wrong.value, 10)
+	wrong = h_data.wrong.value
+	if (h_data.input == null) {
 		h_stop()
 		return
 	}
@@ -47,22 +44,22 @@ function h_next() {
 	}
 
 	// Miss chance
-
 	if (h_data.miss !== 0 && Math.random()*100 < h_data.miss) {
-		out = eval(hackit) - random(1, 20)
+		out = eval(hackit) - random(-20, 20)
 		iswrong = true
 	} else {
 		out = eval(hackit)
 	}
 
-	input.value = out
+	h_data.input.value = out
 	arithmetic.v86()
 
 	// We did something wrong
-	if ($("#q91a").value > wrong && !iswrong) {
+	if (h_data.wrong.value > wrong && !iswrong) {
 		console.info("I did ", hackit, " wrong!!")
 		h_stop()
 	}
+
 	// wrong + right = lenght
 	if (+total+1 >= +h_data.lenght && !h_data.isinfinite) {
 		h_stop()
@@ -86,8 +83,10 @@ function h_apply() {
 	h_data.max = form["h_value_max"].value
 	h_data.miss = form["h_misschance"].value
 
-	h_data.button = $("#OK")
 	h_data.lenght = $("#TESTLENGTH").value
+	h_data.right = $("#q917")
+	h_data.wrong = $("#q91a")
+	h_data.input = $("input#C")
 
 
 	if (h_data.lenght == 101) {
