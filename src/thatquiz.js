@@ -22,6 +22,7 @@ function h_next() {
 	if (!h_data.running) {
 		return
 	}
+
 	right = $("#q917").value
 	wrong = $("#q91a").value
 	total = parseInt(right, 10)+parseInt(wrong, 10)
@@ -44,6 +45,11 @@ function h_next() {
 	input.value = out
 	arithmetic.v86()
 
+	// We did something wrong
+	if ($("#q91a").value > wrong) {
+		console.info("I did ", hackit, " wrong!!")
+		h_stop()
+	}
 	// wrong + right = lenght
 	if (+total+1 >= +h_data.lenght && !h_data.isinfinite) {
 		h_stop()
