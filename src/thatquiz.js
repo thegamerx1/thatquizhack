@@ -1,14 +1,14 @@
 var h_data = {}
 h_data.running = false
 
-function random(min, max) { return parseInt(Math.random() * (max - min) + min) }
+function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function h_stop() {
 	console.info("Done")
 	h_data.running = false
 }
 
 function h_random() {
-	return random(h_data.min, h_data.max)
+	return random(+h_data.min, +h_data.max)
 }
 
 function h_request(url) {
@@ -16,6 +16,11 @@ function h_request(url) {
 	xmlHttp.open("GET", url, false)
 	xmlHttp.send(null)
 	return xmlHttp.responseText
+}
+
+function h_misschange(e) {
+	$("#h_misschancenum").innerHTML = e.value
+	console.info("0." + document.forms["h_form"]["h_misschance"].value)
 }
 
 function h_next() {
@@ -41,12 +46,20 @@ function h_next() {
 		hackit = hackit.replace('–', "-") //Substraction
 	}
 
-	out = eval(hackit)
+	// Miss chance
+
+	if (h_data.miss !== 0 && Math.random()*100 < h_data.miss) {
+		out = eval(hackit) - random(1, 20)
+		iswrong = true
+	} else {
+		out = eval(hackit)
+	}
+
 	input.value = out
 	arithmetic.v86()
 
 	// We did something wrong
-	if ($("#q91a").value > wrong) {
+	if ($("#q91a").value > wrong && !iswrong) {
 		console.info("I did ", hackit, " wrong!!")
 		h_stop()
 	}
@@ -71,9 +84,11 @@ function h_apply() {
 
 	h_data.min = form["h_value_min"].value
 	h_data.max = form["h_value_max"].value
+	h_data.miss = form["h_misschance"].value
 
 	h_data.button = $("#OK")
 	h_data.lenght = $("#TESTLENGTH").value
+
 
 	if (h_data.lenght == 101) {
 		h_data.isinfinite = true
@@ -89,12 +104,12 @@ function h_apply() {
 	};
 	button.innerHTML = "Stop"
 	button.id = "h_stopbtn"
-	$("#qocenter").append(button)
+	$("#bz1x").append(button)
 	setTimeout(h_next, 300)
 }
 
 function h_init() {
-	islocal = false
+	islocal = true
 	console.info("Creating menu")
 
 	if (islocal) {
@@ -110,6 +125,6 @@ function h_init() {
 
 	style = document.createElement("style")
 	style.innerHTML = css
-	document.getElementById("h_menu").prepend(style)
+	$("#h_menu").prepend(style)
 }
 h_init()
