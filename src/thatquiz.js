@@ -74,6 +74,16 @@ function h_apply() {
 	}
 
 	$("#h_menu").remove()
+
+	button = document.createElement("button")
+	button.type = "button"
+	button.onclick = function () {
+		$("#h_stopbtn").remove()
+		h_stop()
+	};
+	button.innerHTML = "Stop"
+	button.id = "h_stopbtn"
+	$("#qocenter").append(button)
 	setTimeout(h_next, 300)
 }
 
