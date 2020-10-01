@@ -1,5 +1,6 @@
 var h_data = {}
 h_data.running = false
+h_data.version = 1
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function h_stop() {
@@ -13,7 +14,7 @@ function h_random() {
 
 function h_request(url) {
 	var xmlHttp = new XMLHttpRequest()
-	xmlHttp.open("GET", url+"?v=" + Math.random(), false)
+	xmlHttp.open("GET", url + "?v=" + h_data.version, false)
 	xmlHttp.send()
 	return xmlHttp.responseText
 }
