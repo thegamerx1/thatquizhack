@@ -13,8 +13,8 @@ function h_random() {
 
 function h_request(url) {
 	var xmlHttp = new XMLHttpRequest()
-	xmlHttp.open("GET", url, false)
-	xmlHttp.send(null)
+	xmlHttp.open("GET", url+"?v=" + Math.random(), false)
+	xmlHttp.send()
 	return xmlHttp.responseText
 }
 
