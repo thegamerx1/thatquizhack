@@ -20,7 +20,6 @@ function h_request(url) {
 
 function h_misschange(e) {
 	$("#h_misschancenum").innerHTML = e.value
-	console.info("0." + document.forms["h_form"]["h_misschance"].value)
 }
 
 function h_next() {
@@ -109,7 +108,7 @@ function h_apply() {
 }
 
 function h_init() {
-	islocal = true
+	islocal = false
 	console.info("Creating menu")
 
 	if (islocal) {
