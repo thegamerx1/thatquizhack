@@ -1,6 +1,6 @@
 var h_data = {}
 h_data.running = false
-h_data.version = 1
+h_data.version = "1.0"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function h_stop() {
@@ -12,9 +12,14 @@ function h_random() {
 	return random(+h_data.min, +h_data.max)
 }
 
-function h_request(url) {
+function h_request(url, nocache) {
 	var xmlHttp = new XMLHttpRequest()
-	xmlHttp.open("GET", url + "?v=" + h_data.version, false)
+	if (nocache) {
+		url = url + "?rand=" + random(-9999, 9999)
+	} else {
+		url = url + "?v=" + h_data.version*100
+	}
+	xmlHttp.open("GET", url, false)
 	xmlHttp.send()
 	return xmlHttp.responseText
 }
@@ -108,7 +113,7 @@ function h_apply() {
 }
 
 function h_init() {
-	islocal = true
+	islocal = false
 	console.info("Creating menu")
 
 	if (islocal) {
@@ -125,11 +130,9 @@ function h_init() {
 	style = document.createElement("style")
 	style.innerHTML = css
 	$("#h_menu").prepend(style)
-	if (!islocal) {
-		if (h_data.version !== h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version")) {
-			$("#h_menu .container .version").style.display = "none"
-			$("#h_menu .container form").style.display = "block"
-		}
+	if (!islocal && h_data.version === h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version", true)) {
+		$("#h_menu .container .version").style.display = "none"
+		$("#h_menu .container form").style.display = "block"
 	}
 }
 h_init()
