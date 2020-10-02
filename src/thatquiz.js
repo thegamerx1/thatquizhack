@@ -1,11 +1,15 @@
 var h_data = {}
 h_data.running = false
-h_data.version = "1.3"
+h_data.version = "1.4"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function h_stop() {
 	console.info("Done")
 	h_data.running = false
+
+	if ($("#h_stopbtn")) {
+		$("#h_stopbtn").remove()
+	}
 }
 
 function h_random() {
@@ -33,9 +37,11 @@ function h_next() {
 		return
 	}
 
+	iswrong = false
 	total = parseInt(h_data.right.value, 10) + parseInt(h_data.wrong.value, 10)
 	wrong = h_data.wrong.value
-	if (h_data.input == null) {
+	input = $("input#C")
+	if (input == null) {
 		h_stop()
 		return
 	}
@@ -56,7 +62,7 @@ function h_next() {
 		out = eval(hackit)
 	}
 
-	h_data.input.value = out
+	input.value = out
 	arithmetic.v86()
 
 	// We did something wrong
@@ -91,7 +97,6 @@ function h_apply() {
 	h_data.lenght = $("#TESTLENGTH").value
 	h_data.right = $("#q917")
 	h_data.wrong = $("#q91a")
-	h_data.input = $("input#C")
 
 
 	if (h_data.lenght == 101) {
@@ -135,5 +140,6 @@ function h_init() {
 		$("#h_menu .container .version").style.display = "block"
 		$("#h_menu .container form").style.display = "none"
 	}
+	$("#h_value_max").focus()
 }
 h_init()
