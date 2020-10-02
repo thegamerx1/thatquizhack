@@ -1,6 +1,6 @@
 var h_data = {}
 h_data.running = false
-h_data.version = "1.4"
+h_data.version = "1.5"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function h_stop() {
@@ -40,7 +40,8 @@ function h_next() {
 	iswrong = false
 	total = parseInt(h_data.right.value, 10) + parseInt(h_data.wrong.value, 10)
 	wrong = h_data.wrong.value
-	input = $("input#C")
+
+	input = document.querySelector("input#C")
 	if (input == null) {
 		h_stop()
 		return
@@ -72,14 +73,18 @@ function h_next() {
 	}
 
 	// wrong + right = lenght
-	if (+total+1 >= +h_data.lenght && !h_data.isinfinite) {
+	if (!h_data.isinfinite && +total+1 >= +h_data.lenght) {
 		h_stop()
 		return
 	}
 
-	randoms = h_random()
-	if (randoms !== 0) {
-		console.info("Waiting " + randoms + "ms")
+	if (!h_data.isbrute) {
+		randoms = h_random()
+		if (randoms !== 0) {
+			console.info("Waiting " + randoms + "ms")
+		}
+	} else {
+		randoms = 0
 	}
 
 	setTimeout(h_next,randoms)
@@ -97,6 +102,7 @@ function h_apply() {
 	h_data.lenght = $("#TESTLENGTH").value
 	h_data.right = $("#q917")
 	h_data.wrong = $("#q91a")
+	h_data.isbrute = (h_data.max === 0)
 
 
 	if (h_data.lenght == 101) {
