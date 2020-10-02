@@ -108,7 +108,7 @@ function h_apply() {
 }
 
 function h_init() {
-	islocal = false
+	islocal = true
 	console.info("Creating menu")
 
 	if (islocal) {
@@ -125,5 +125,11 @@ function h_init() {
 	style = document.createElement("style")
 	style.innerHTML = css
 	$("#h_menu").prepend(style)
+	if (!islocal) {
+		if (h_data.version !== h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version")) {
+			$("#h_menu .container .version").style.display = "none"
+			$("#h_menu .container form").style.display = "block"
+		}
+	}
 }
 h_init()
