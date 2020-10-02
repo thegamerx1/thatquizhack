@@ -1,6 +1,6 @@
 var h_data = {}
 h_data.running = false
-h_data.version = "1.0"
+h_data.version = "1.1"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function h_stop() {
