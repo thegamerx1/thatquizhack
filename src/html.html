@@ -2,10 +2,10 @@
 	<div class="container">
 		<form name="h_form">
 			<label for="h_value_min">Min Delay:</label>
-			<input type="number" id="h_value_min" name="h_value_min" max="30000" value="3000">ms
+			<input type="number" id="h_value_min" name="h_value_min" max="30000" value="3000" onclick="this.select()">ms
 
 			<label for="h_value_max">Max Delay:</label>
-			<input type="number" id="h_value_max" name="h_value_max" max="30000" value="15000">ms
+			<input type="number" id="h_value_max" name="h_value_max" max="30000" value="15000" onclick="this.select()">ms
 
 			<label for="h_value_max">Miss chance:</label>
 			<input oninput="h_misschange(this)" type="range" name="h_misschance" id="h_misschance" min="0" max="75" value="5">
