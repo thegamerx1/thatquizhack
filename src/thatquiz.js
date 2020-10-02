@@ -1,6 +1,6 @@
 var h_data = {}
 h_data.running = false
-h_data.version = "1.1"
+h_data.version = "1.3"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function h_stop() {
@@ -113,7 +113,7 @@ function h_apply() {
 }
 
 function h_init() {
-	islocal = true
+	islocal = false
 	console.info("Creating menu")
 
 	if (islocal) {
@@ -130,7 +130,8 @@ function h_init() {
 	style = document.createElement("style")
 	style.innerHTML = css
 	$("#h_menu").prepend(style)
-	if (!islocal && !h_data.version === h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version", true)) {
+	if (!islocal && h_data.version !== h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version", true)) {
+		console.info("New version available")
 		$("#h_menu .container .version").style.display = "block"
 		$("#h_menu .container form").style.display = "none"
 	}
