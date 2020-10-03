@@ -131,7 +131,7 @@ function h_apply() {
 
 function h_init() {
 	h_clean()
-	islocal = true
+	islocal = false
 	console.info("Creating menu")
 
 	if (islocal) {
