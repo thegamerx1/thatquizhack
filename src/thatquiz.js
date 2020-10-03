@@ -1,15 +1,19 @@
 var h_data = {}
 h_data.running = false
-h_data.version = "1.4"
+h_data.version = "1.7"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function h_stop() {
 	console.info("Done")
+	h_clean()
+}
+
+function h_clean() {
 	h_data.running = false
 
-	button = document.getElementById("h_stopbtn")
-	if (button) {
-		button.remove()
+	menu = document.getElementById("h_injectmenu")
+	if (menu) {
+		menu.remove()
 	}
 }
 
@@ -29,8 +33,15 @@ function h_request(url, nocache) {
 	return xmlHttp.responseText
 }
 
-function h_misschange(e) {
-	document.getElementById("h_misschancenum").innerHTML = e.value
+function h_updateprogress() {
+	if (!h_data.running) {
+		return
+	}
+	value = Date.now() - h_data.progresstart
+	document.getElementById("h_progress").innerHTML = Math.floor(value / h_data.waittime * 100)
+	if (!(value >= h_data.waittime)) {
+		setTimeout(h_updateprogress, 50)
+	}
 }
 
 function h_next() {
@@ -76,16 +87,13 @@ function h_next() {
 		h_stop()
 	}
 
-	// wrong + right = lenght
-	if (!h_data.isinfinite && +total+1 >= +h_data.lenght) {
-		h_stop()
-		return
-	}
-
 	if (!h_data.isbrute) {
 		randoms = h_random()
 		if (randoms !== 0) {
-			console.info("Waiting " + randoms + "ms")
+			h_data.waittime = randoms
+			h_data.progresstart = new Date()
+			document.getElementById("h_progresstime").innerHTML = randoms
+			setTimeout(h_updateprogress, 0)
 		}
 	} else {
 		randoms = 0
@@ -115,20 +123,15 @@ function h_apply() {
 
 	document.getElementById("h_menu").remove()
 
-	button = document.createElement("button")
-	button.type = "button"
-	button.onclick = function () {
-		document.getElementById("h_stopbtn").remove()
-		h_stop()
-	};
-	button.innerHTML = "Stop"
-	button.id = "h_stopbtn"
-	document.getElementById("bz1x").append(button)
-	setTimeout(h_next, 100)
+	injectmenu = document.getElementById("h_injectmenu")
+	document.getElementById("bz1x").after(injectmenu)
+	injectmenu.hidden = false
+	h_next()
 }
 
 function h_init() {
-	islocal = false
+	h_clean()
+	islocal = true
 	console.info("Creating menu")
 
 	if (islocal) {
@@ -146,7 +149,7 @@ function h_init() {
 	style.innerHTML = css
 	document.getElementById("h_menu").prepend(style)
 	if (!islocal && h_data.version !== h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version", true)) {
-		$("#h_menu .container .version").style.display = "block"
+		document.querySelector("#h_menu .container .version").style.display = "block"
 	}
 }
 h_init()
