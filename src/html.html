@@ -8,7 +8,7 @@
 			<input type="number" id="h_value_min" name="h_value_min" max="30000" value="3000" onclick="this.select()">ms
 
 			<label for="h_value_max">Miss chance:</label>
-			<input oninput="h_misschange(this)" type="range" name="h_misschance" id="h_misschance" min="0" max="75" value="5">
+			<input type="range" name="h_misschance" id="h_misschance" min="0" max="75" value="5" oninput="document.getElementById('h_misschancenum').innerHTML = this.value">
 			<span id="h_misschancenum">5</span>%
 
 			<button type="button" onclick="h_apply()">OK</button>
@@ -27,4 +27,9 @@
 			</p>
 		</div>
 	</div>
+</div>
+
+<div id="h_injectmenu" hidden>
+	<p><span id="h_progress">0</span>% / <span id="h_progresstime">100</span>ms</p>
+	<button type="button" onclick="h_toggle()" id="h_stopbtn">Stop</button>
 </div>
