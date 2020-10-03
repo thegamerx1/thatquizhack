@@ -1,7 +1,7 @@
-$width: 275px
-$height: 300px
+$width: 260px
+$height: 350px
 #h_menu
-	color: #a5a5a5
+	color: #b8b8b8
 	position: fixed
 	width: $width
 	height: $height
@@ -9,33 +9,46 @@ $height: 300px
 	left: 50%
 	margin-top: floor(-$width/2)
 	margin-left: floor(-$height/2)
-	background-color: #474747
-	padding: 30px
+	background-color: #4e4e4e
+	padding: 0 30px
 	z-index: 1000
 	box-shadow: 5px 5px 3px 3px rgba(0,0,0,0.35)
+	display: flex
 
 	.container
+		flex: 1
 		display: flex
-		margin: auto
+		flex-direction: column
+		align-items: center
+
+		a
+			color: #faf
+
+		form
+			flex: 1
+
+		.spacey
+			flex-grow: 1
 
 		label
 			display: block
 			margin-top: 15px
 			margin-bottom: 3px
 
-		input
-			flex: 1
-
 		button
 			display: block
 			margin-top: 10px
 
-		.who
-			position: absolute
-			bottom: 0
-			text-align: right
-			right: 0
-			margin-right: 20px
-
 		.version
+			color: #ffa825
 			display: none
+			text-align: center
+
+		.footer
+			flex: 1
+			display: flex
+			flex-direction: row
+
+			.who
+				flex: 1 1 40vw
+				text-align: center
