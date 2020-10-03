@@ -1,6 +1,6 @@
 var h_data = {}
 h_data.running = false
-h_data.version = "1.7"
+h_data.version = "1.8"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function h_stop() {
@@ -142,12 +142,13 @@ function h_init() {
 		css = h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/src/css.css")
 	}
 
-	html = document.createRange().createContextualFragment(html)
-	document.body.appendChild(html)
-
 	style = document.createElement("style")
 	style.innerHTML = css
-	document.getElementById("h_menu").prepend(style)
+
+	html = document.createRange().createContextualFragment(html)
+
+	document.body.appendChild(html)
+	document.head.append(style)
 	if (!islocal && h_data.version !== h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version", true)) {
 		document.querySelector("#h_menu .container .version").style.display = "block"
 	}
