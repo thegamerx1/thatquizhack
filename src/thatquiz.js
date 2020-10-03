@@ -1,14 +1,15 @@
 var h_data = {}
 h_data.running = false
-h_data.version = "1.5"
+h_data.version = "1.6"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function h_stop() {
 	console.info("Done")
 	h_data.running = false
 
-	if ($("#h_stopbtn")) {
-		$("#h_stopbtn").remove()
+	button = document.getElementById("h_stopbtn")
+	if (button) {
+		button.remove()
 	}
 }
 
@@ -29,7 +30,7 @@ function h_request(url, nocache) {
 }
 
 function h_misschange(e) {
-	$("#h_misschancenum").innerHTML = e.value
+	docuement.getElementById("h_misschancenum").innerHTML = e.value
 }
 
 function h_next() {
@@ -55,12 +56,15 @@ function h_next() {
 		hackit = hackit.replace('–', "-") //Substraction
 	}
 
+	// hackit = arithmetic.ca
+
 	// Miss chance
 	if (h_data.miss !== 0 && Math.random()*100 < h_data.miss) {
 		out = eval(hackit) - random(-20, 20)
 		iswrong = true
 	} else {
 		out = eval(hackit)
+		// out = hackit
 	}
 
 	input.value = out
@@ -99,9 +103,9 @@ function h_apply() {
 	h_data.max = form["h_value_max"].value
 	h_data.miss = form["h_misschance"].value
 
-	h_data.lenght = $("#TESTLENGTH").value
-	h_data.right = $("#q917")
-	h_data.wrong = $("#q91a")
+	h_data.lenght = document.getElementById("TESTLENGTH").value
+	h_data.right = document.getElementById("q917")
+	h_data.wrong = document.getElementById("q91a")
 	h_data.isbrute = (h_data.max === 0)
 
 
@@ -109,22 +113,22 @@ function h_apply() {
 		h_data.isinfinite = true
 	}
 
-	$("#h_menu").remove()
+	document.getElementById("h_menu").remove()
 
 	button = document.createElement("button")
 	button.type = "button"
 	button.onclick = function () {
-		$("#h_stopbtn").remove()
+		document.getElementById("h_stopbtn").remove()
 		h_stop()
 	};
 	button.innerHTML = "Stop"
 	button.id = "h_stopbtn"
-	$("#bz1x").append(button)
-	setTimeout(h_next, 300)
+	document.getElementById("bz1x").append(button)
+	setTimeout(h_next, 100)
 }
 
 function h_init() {
-	islocal = false
+	islocal = true
 	console.info("Creating menu")
 
 	if (islocal) {
