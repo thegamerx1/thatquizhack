@@ -24,7 +24,7 @@ function h_random() {
 function h_request(url, nocache) {
 	var xmlHttp = new XMLHttpRequest()
 	if (nocache) {
-		url = url + "?rand=" + random(-9999, 9999)
+		url = url + "?_=" + new Date().getTime()
 	} else {
 		url = url + "?v=" + Math.floor(h_data.version*100)
 	}
