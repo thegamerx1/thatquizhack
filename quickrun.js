@@ -3,4 +3,5 @@ xmlHttp.open("GET", "https://raw.githubusercontent.com/thegamerx1/thatquizhack/m
 xmlHttp.send()
 script = document.createElement("script")
 script.innerHTML = xmlHttp.responseText
+h_islocal = false
 document.head.append(script)
