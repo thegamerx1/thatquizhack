@@ -15,9 +15,9 @@ ExitApp
 
 compileJS(file, to) {
 	jscode := FileOpen(file, "r").Read()
-	request := new requests("https://closure-compiler.appspot.com/compile", "POST")
+	request := new requests("https://javascript-minifier.com/raw", "POST")
 	request.header("Content-Type", "application/x-www-form-urlencoded")
-	request.data(["js_code=" jscode, "output_info=compiled_code", "output_format=text", "compilation_level=SIMPLE_OPTIMIZATIONS"])
+	request.data(["input=" jscode])
 	file := FileOpen(to, "w")
 	file.Write(request.send().ResponseText)
 	file.Close()
