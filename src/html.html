@@ -1,15 +1,23 @@
 <div id="h_menu">
 	<div class="container">
 		<form name="h_form">
-			<label for="h_value_max">Max Delay:</label>
-			<input type="number" id="h_value_max" name="h_value_max" max="30000" value="15000" onclick="this.select()">ms
+			<label for="h_delay">Delay:</label>
+			<div class="input-container">
+				<input type="range" id="h_delay" name="h_delay" value="10000" min="0" max="20000" oninput="h_inputboxie(this, true)">
+				<input id="h_delay_num" value="10000" disabled>s
+			</div>
 
-			<label for="h_value_min">Min Delay:</label>
-			<input type="number" id="h_value_min" name="h_value_min" max="30000" value="3000" onclick="this.select()">ms
+			<label for="h_variation">Variation:</label>
+			<div class="input-container">
+				<input type="range" id="h_variation" name="h_variation" value="3000" min="0" max="5000" oninput="h_inputboxie(this, true)">
+				<input id="h_variation_num" value="3000" disabled>s
+			</div>
 
-			<label for="h_value_max">Miss chance:</label>
-			<input type="range" name="h_misschance" id="h_misschance" min="0" max="75" value="5" oninput="document.getElementById('h_misschancenum').innerHTML = this.value">
-			<span id="h_misschancenum">5</span>%
+			<label for="h_misschance">Miss chance:</label>
+			<div class="input-container">
+				<input type="range" name="h_misschance" id="h_misschance" min="0" max="25" value="5" oninput="h_inputboxie(this, false)">
+				<input id="h_misschance_num" value="5" disabled>%
+			</div>
 
 			<button type="button" onclick="h_apply()">OK</button>
 		</form>
@@ -33,5 +41,5 @@
 	<div class="progress-wrap">
 		<div class="progress" id="h_progress"></div>
 	</div>
-	<button type="button" onclick="h_toggle(this)" id="h_stopbtn">Stop</button>
+	<button type="button" id="h_stopbtn">Stop</button>
 </div>
