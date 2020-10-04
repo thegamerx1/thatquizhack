@@ -148,6 +148,7 @@ function h_init() {
 	islocal = (typeof h_islocal == "undefined")
 
 	if (islocal) {
+		console.info("Local")
 		html = h_request("http://127.0.0.1:5500/src/html.html")
 		css = h_request("http://127.0.0.1:5500/src/css.css")
 	} else {
