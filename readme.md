@@ -16,8 +16,8 @@ Running the script without the quick run will make it run in local mode
 
 # Instructions
 
-1. Open debug console (`CTRL + SHIFT + K`)
-2. Paste thatquiz.js contents
-3. Press (`ENTER`)
+1. Open debug console
+2. Paste quickrun.js contents
+3. Press `ENTER`
 4. Modify the configuration to ur liking
 5. Press `OK` button
