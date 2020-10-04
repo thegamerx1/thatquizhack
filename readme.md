@@ -6,8 +6,13 @@ xmlHttp.open("GET", "https://raw.githubusercontent.com/thegamerx1/thatquizhack/m
 xmlHttp.send()
 script = document.createElement("script")
 script.innerHTML = xmlHttp.responseText
-document.body.append(script)
+h_islocal = false
+document.head.append(script)
 ```
+
+# Note
+
+Running the script without the quick run with make it run in local mode
 
 # Instructions
 
