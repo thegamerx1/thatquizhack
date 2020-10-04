@@ -21,6 +21,19 @@ function h_random() {
 	return random(+h_data.min, +h_data.max)
 }
 
+function h_toggle(e) {
+	if (h_data.running) {
+		h_data.wasrunning = true
+		h_data.running = false
+	} else if (h_data.wasrunning) {
+		h_data.running = true
+		h_data.wasrunning = false
+		h_next()
+	}
+
+	e.innerHTML = h_data.running ? "Stop" : "Resume"
+}
+
 function h_request(url, nocache) {
 	var xmlHttp = new XMLHttpRequest()
 	if (nocache) {
@@ -38,7 +51,7 @@ function h_updateprogress() {
 		return
 	}
 	value = Date.now() - h_data.progresstart
-	document.getElementById("h_progress").innerHTML = Math.floor(value / h_data.waittime * 100)
+	document.getElementById("h_progress").style.width = Math.floor(value / h_data.waittime * 100) + "%"
 	if (!(value >= h_data.waittime)) {
 		setTimeout(h_updateprogress, 50)
 	}
@@ -92,7 +105,7 @@ function h_next() {
 		if (randoms !== 0) {
 			h_data.waittime = randoms
 			h_data.progresstart = new Date()
-			document.getElementById("h_progresstime").innerHTML = randoms
+			document.getElementById("h_progress").style.width = 0
 			setTimeout(h_updateprogress, 0)
 		}
 	} else {
@@ -131,8 +144,8 @@ function h_apply() {
 
 function h_init() {
 	h_clean()
-	islocal = false
 	console.info("Creating menu")
+	islocal = (typeof h_islocal == "undefined")
 
 	if (islocal) {
 		html = h_request("http://127.0.0.1:5500/src/html.html")
