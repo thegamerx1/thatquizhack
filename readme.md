@@ -12,7 +12,7 @@ document.head.append(script)
 
 # Note
 
-Running the script without the quick run with make it run in local mode
+Running the script without the quick run will make it run in local mode
 
 # Instructions
 
