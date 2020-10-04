@@ -30,6 +30,8 @@
 </div>
 
 <div id="h_injectmenu" hidden>
-	<p><span id="h_progress">0</span>% / <span id="h_progresstime">100</span>ms</p>
-	<button type="button" onclick="h_toggle()" id="h_stopbtn">Stop</button>
+	<div class="progress-wrap">
+		<div class="progress" id="h_progress"></div>
+	</div>
+	<button type="button" onclick="h_toggle(this)" id="h_stopbtn">Stop</button>
 </div>
