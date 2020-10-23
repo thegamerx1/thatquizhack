@@ -15,6 +15,7 @@ function hex_Fractions(data, istest) {
 	var bottomrightdata = inputs[3]
 	var bottomleftdata = inputs[2]
 
+	if (!cinput && !topinput && !topinput) return "done"
 
 	if (decimaldata) {
 		var cvalue = eval(h_tomath(decimaldata.textContent))

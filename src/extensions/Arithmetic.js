@@ -4,7 +4,7 @@ function hex_Arithmetic(data, istest) {
 	}
 
 	var input = data.table.querySelector("input#C")
-
+	if (!input) return "done"
 	// Convert symbols to math
 	var calculation = eval(h_tomath(data.table.querySelector("tbody tr td.qq.nw").innerHTML))
 
@@ -15,7 +15,6 @@ function hex_Arithmetic(data, istest) {
 		var out = eval(calculation)
 	}
 
-	// console.info(calculation + " = " + out)
 	input.value = out
 	arithmetic.v86()
 	return
