@@ -16,6 +16,10 @@ h_inject()
 
 Running the script without the quick run will make it run in local mode
 
+# Known issues
+
+* Fraction math with negative numbers returns numbers with not negative
+
 # Instructions
 
 1. Open debug console

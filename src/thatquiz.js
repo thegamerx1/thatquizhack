@@ -80,7 +80,7 @@ function h_callextension(name, istest) {
 	var data = {}
 	if (!istest) {
 		data.table = h_gettable()
-		data.iswrong = (Math.random() * 100 < h_data.miss)
+		data.iswrong = (!h_data.miss === 0) ? (Math.random() * 100 < h_data.miss) : false
 	}
 	return { output: window[name](data, istest), iswrong: data.iswrong}
 }
@@ -95,16 +95,17 @@ function h_next() {
 	var oldwrong = h_getwrong()
 	var output = h_callextension(h_data.test)
 
-	// We did somethig wrong
-	if (!output.iswrong && oldwrong > h_getwrong()) {
-		h_data.waswrong = false
-		console.warn("I did it wrong!!")
+
+	// We are done
+	if (output.output === "done") {
 		h_stop()
 		return
 	}
 
-	// We are done
-	if (output.output === "done") {
+	// We did somethig wrong
+	if (!output.iswrong && h_getwrong() > oldwrong) {
+		h_data.waswrong = false
+		console.warn("I did it wrong!!")
 		h_stop()
 		return
 	}
