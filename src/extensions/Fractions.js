@@ -49,9 +49,9 @@ function hex_Fractions(data, istest) {
 		cinput.value = cvalue
 		arithmetic.v86()
 	} else {
-		fraction.v86()
 		topinput.value = topvalue
 		bottominput.value = bottomvalue
+		fraction.v86()
 	}
 	return
 }
