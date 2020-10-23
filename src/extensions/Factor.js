@@ -36,7 +36,7 @@ function hex_Factor(data, istest) {
 	}
 
 	if (greatestfactorbutton) {
-		var match = greatestfactortext.innerHTML.match(/(?<one>\d+)[A-Za-z ]+(?<two>\d+)/)
+		var match = greatestfactortext.innerHTML.match(/(\d+)[A-Za-z ]+(\d+)/)
 		var out = math.gcd(match[1], match[2])
 
 	}
