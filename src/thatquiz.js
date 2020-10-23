@@ -85,19 +85,19 @@ function h_callextension(name, istest) {
 	return { output: window[name](data, istest), iswrong: data.iswrong}
 }
 
+function h_getwrong() {
+	return document.getElementById("q91a").value
+}
+
 function h_next() {
 	if (!h_data.running) return
 
-	if (!h_callextension(h_data.test, true).output) {
-		h_stop()
-		return
-	}
-
-	var wrongbeforecall = h_data.wrong.value
+	var oldwrong = h_getwrong()
 	var output = h_callextension(h_data.test)
 
 	// We did somethig wrong
-	if (!output.iswrong && (wrongbeforecall > h_data.wrong.value)) {
+	if (!output.iswrong && oldwrong > h_getwrong()) {
+		h_data.waswrong = false
 		console.warn("I did it wrong!!")
 		h_stop()
 		return
@@ -132,9 +132,6 @@ function h_apply() {
 	h_data.variation = form["h_variation"].value
 	h_data.miss = form["h_misschance"].value
 
-	h_data.lenght = document.getElementById("TESTLENGTH").value
-	h_data.right = document.getElementById("q917")
-	h_data.wrong = document.getElementById("q91a")
 	h_data.isbrute = (h_data.delay == 0) ? true : false
 
 	document.getElementById("h_menu").remove()
@@ -205,6 +202,8 @@ function h_init() {
 	}
 	if (islocal) {
 		h_license(true)
+		document.querySelector("#h_delay").value = 0
+		document.querySelector("#h_misschance").value = 0
 	}
 }
 h_init()

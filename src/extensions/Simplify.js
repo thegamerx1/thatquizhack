@@ -10,6 +10,8 @@ function hex_Simplify(data, istest) {
 	var topdata = data.table.querySelector("tr.qq:nth-child(1) > td:nth-child(2)")
 	var bottomdata = data.table.querySelector("tr.qq:nth-child(3) > td:nth-child(1)")
 
+	if (!decimaldata && !topinput && !bottominput) return "done"
+
 	if (decimaldata) {
 		var simplify = math.simplify(decimaldata.textContent.replace(",", "."))
 		var topvalue = simplify.args[0]

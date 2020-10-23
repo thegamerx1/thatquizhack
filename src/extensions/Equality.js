@@ -3,10 +3,12 @@ function hex_Equality(data, istest) {
 		return (typeof inequality === 'object' && inequality !== null)
 	}
 
-	var buttons = { "<": data.table.querySelector("tbody tr th#GTA.vam button.qq"), "=": data.table.querySelector("tbody tr th#EQA.vam button.qq"), ">": data.table.querySelector("tbody tr th#LTA.vam button.qq")}
+	var buttons = { ">": data.table.querySelector("tbody tr th#GTA.vam button.qq"), "=": data.table.querySelector("tbody tr th#EQA.vam button.qq"), "<": data.table.querySelector("tbody tr th#LTA.vam button.qq")}
 
-	var leftnum = eval(h_tomath(data.table.querySelector("tbody tr td#A.qq div.nw")))
-	var rightnum = eval(h_tomath(data.table.querySelector("tbody tr td#B.qq div.nw")))
+	if (!buttons["="]) return "done"
+
+	var leftnum = eval(h_tomath(data.table.querySelector("tbody tr td#A.qq div.nw").innerHTML))
+	var rightnum = eval(h_tomath(data.table.querySelector("tbody tr td#B.qq div.nw").innerHTML))
 
 	if (leftnum === rightnum) {
 		var is = buttons["="]
