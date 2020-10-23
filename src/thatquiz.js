@@ -1,12 +1,38 @@
 var h_data = {}
+//InjectJSON//
 h_data.running = false
-h_data.version = "1.8"
+h_data.version = "2.0"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
+function randomarray(array) {return array[Math.floor(Math.random() * array.length)];}
+function h_gettable() {return document.querySelector("#cnvbb") || document.querySelector("#centertext")}
+function isHidden(el) {var style = window.getComputedStyle(el);return (style.display === 'none')}
+function randomobject(obj) {var keys = Object.keys(obj);return obj[keys[Math.floor(Math.random() * keys.length)]]}
+function getPrimeNumbers(num) {
+	var half = Math.floor(num / 2)
+	var array = [1]
+	var i, j
+	num % 2 === 0 ? (i = 2, j = 1) : (i = 3, j = 2);
+	for (i; i <= half; i += j) {num % i === 0 ? array.push(i) : false}
+	array.push(num)
+	return array
+}
+function h_tomath(text) {
+	var text = text.replaceAll('×', "*") //Multiply
+	var text = text.replaceAll('÷', "/") //Divison
+	var text = text.replaceAll('–', "-") //Substraction
+	var text = text.replaceAll(',', ".") //Substraction
+	return text
+}
 function h_clean() {
 	h_data.running = false
-	menu = document.getElementById("h_injectmenu")
+	var menu = document.getElementById("h_injectmenu")
 	if (menu) menu.remove()
+}
+
+function h_stop() {
+	console.info("Stopping")
+	h_clean()
 }
 
 function h_request(url, nocache) {
@@ -19,7 +45,7 @@ function h_request(url, nocache) {
 
 function h_updateprogress() {
 	if (!h_data.running) return
-	value = Date.now() - h_data.progresstart
+	var value = Date.now() - h_data.progresstart
 	document.getElementById("h_progress").style.width = Math.floor(value / h_data.waittime * 100) + "%"
 	if (!(value >= h_data.waittime)) {
 		setTimeout(h_updateprogress, 50)
@@ -40,68 +66,67 @@ function h_stopbtn() {
 }
 
 function h_inputboxie(e, divide) {
-	value = (divide) ? e.value / 1000 : e.value
+	var value = (divide) ? e.value / 1000 : e.value
 	document.getElementById(e.id + "_num").value = value
+}
+
+function h_license(bypass) {
+	if (!bypass && !document.querySelector("#h_menu .container .license input").checked) return
+	document.querySelector("#h_menu .container .license").style.display = "none"
+	document.querySelector("#h_menu .container form").style.display = "block"
+}
+
+function h_callextension(name, istest) {
+	var data = {}
+	if (!istest) {
+		data.table = h_gettable()
+		data.iswrong = (Math.random() * 100 < h_data.miss)
+	}
+	return { output: window[name](data, istest), iswrong: data.iswrong}
 }
 
 function h_next() {
 	if (!h_data.running) return
-	iswrong = false
-	wrong = h_data.wrong.value
 
-	input = document.querySelector("input#C")
-	if (!input) {
-		h_clean()
+	if (!h_callextension(h_data.test, true).output) {
+		h_stop()
 		return
 	}
 
-	// Convert symbols to math
-	hackit = document.querySelector("table.g6cd tbody tr td.qq.nw").innerHTML;
-	for (let step = 0; step < 3; step++) {
-		hackit = hackit.replace('×', "*") //Multiply
-		hackit = hackit.replace('÷', "/") //Divison
-		hackit = hackit.replace('–', "-") //Substraction
-	}
+	var wrongbeforecall = h_data.wrong.value
+	var output = h_callextension(h_data.test)
 
-	// hackit = arithmetic.ca
-
-	// Miss chance
-	if (h_data.miss !== 0 && Math.random()*100 < h_data.miss) {
-		out = eval(hackit) - random(-20, 20)
-		iswrong = true
-	} else {
-		out = eval(hackit)
-		// out = hackit
-	}
-
-	input.value = out
-	arithmetic.v86()
-
-	// We did something wrong
-	if (h_data.wrong.value > wrong && !iswrong) {
-		console.info("I did ", hackit, " wrong!!")
-		h_clean()
+	// We did somethig wrong
+	if (!output.iswrong && (wrongbeforecall > h_data.wrong.value)) {
+		console.warn("I did it wrong!!")
+		h_stop()
 		return
 	}
 
-	if (h_data.isbrute) {
-		randoms = 0
-	} else {
-		randoms = random(+h_data.delay - +h_data.variation, +h_data.delay + +h_data.variation)
-		if (randoms !== 0) {
-			h_data.waittime = randoms
-			h_data.progresstart = new Date()
-			document.getElementById("h_progress").style.width = 0
-			setTimeout(h_updateprogress, 0)
-		}
+	// We are done
+	if (output.output === "done") {
+		h_stop()
+		return
 	}
 
-	setTimeout(h_next,randoms)
+	var sleep = (h_data.isbrute) ? 0 : random(+h_data.delay - +h_data.variation, +h_data.delay + +h_data.variation)
+	if (sleep !== 0) {
+		h_data.waittime = sleep
+		h_data.progresstart = new Date()
+		document.getElementById("h_progress").style.width = 0
+		setTimeout(h_updateprogress, 0)
+	}
+
+	setTimeout(h_next, sleep)
 }
 
 function h_apply() {
+	if (!h_gettable()) {
+		console.error("are you in a test?")
+		return
+	}
 	h_data.running = true
-	form = document.forms["h_form"]
+	var form = document.forms["h_form"]
 
 	h_data.delay = form["h_delay"].value
 	h_data.variation = form["h_variation"].value
@@ -113,7 +138,7 @@ function h_apply() {
 	h_data.isbrute = (h_data.delay == 0) ? true : false
 
 	document.getElementById("h_menu").remove()
-	injectmenu = document.getElementById("h_injectmenu")
+	var injectmenu = document.getElementById("h_injectmenu")
 	document.getElementById("bz1x").after(injectmenu)
 	injectmenu.hidden = false
 	document.getElementById("h_stopbtn").addEventListener("click", h_stopbtn)
@@ -122,27 +147,64 @@ function h_apply() {
 
 function h_init() {
 	h_clean()
-	console.info("Creating menu")
-	islocal = (typeof h_islocal == "undefined")
+	var islocal = (!h_data.extensionlist)
+	var path
 
 	if (islocal) {
 		console.info("Running in local mode. if you dont know what this is you did something wrong!")
-		path = "http://127.0.0.1:5500/src/"
+		path = "http://localhost:5500/src/"
 	} else {
 		path = "https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/src/"
 	}
-	html = h_request(path + "html.html")
-	css = h_request(path + "css.css")
+	console.info("Loading extensions")
 
-	style = document.createElement("style")
+	if (islocal) {
+		var extensionlist = JSON.parse(h_request(path + "extensions.json"))
+	} else {
+		var extensionlist = h_data.extensionlist
+	}
+
+	for (i = 0; i < extensionlist.list.length; i++) {
+		var name = extensionlist.list[i]
+		if (islocal) {
+			var extension = document.createElement("script")
+			extension.innerHTML = h_request(path + "extensions/" + name + ".js")
+			document.body.append(extension)
+		}
+		var hex = "hex_" + name
+		if (h_callextension(hex, true).output) {
+			console.info("Test is: " + name)
+			h_data.test = hex
+			break
+		}
+	}
+
+	if (!h_data.test) {
+		console.error("Could not find a extension for current test.")
+		return
+	}
+
+
+	var mathjs = document.createElement("script")
+	mathjs.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.5.1/math.min.js"
+	document.body.append(mathjs)
+
+	var html = h_request(path + "html.html")
+	var css = h_request(path + "css.css")
+
+	var style = document.createElement("style")
 	style.innerHTML = css
 
-	html = document.createRange().createContextualFragment(html)
+	var html = document.createRange().createContextualFragment(html)
 
 	document.body.appendChild(html)
 	document.head.append(style)
+
 	if (!islocal && h_data.version !== h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version", true)) {
 		document.querySelector("#h_menu .container .version").style.display = "block"
+	}
+	if (islocal) {
+		h_license(true)
 	}
 }
 h_init()
