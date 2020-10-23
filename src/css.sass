@@ -26,8 +26,8 @@ $height: 350px
 	height: $height
 	top: 50%
 	left: 50%
-	margin-top: floor(-$width/2)
-	margin-left: floor(-$height/2)
+	margin-left: floor(-$width/2)
+	margin-top: floor(-$height/2)
 	background-color: #4e4e4e
 	padding: 0 30px
 	z-index: 1000
@@ -35,6 +35,7 @@ $height: 350px
 	display: flex
 
 	.container
+		padding-top: 2%
 		flex: 1
 		display: flex
 		flex-direction: column
@@ -44,6 +45,7 @@ $height: 350px
 			color: #faf
 
 		form
+			display: none
 			flex: 1
 
 			input:disabled
@@ -56,6 +58,15 @@ $height: 350px
 
 			button
 				display: block
+				margin-top: 10px
+
+		.license
+			margin-top: 10px
+			label
+				user-select: none
+				color: #ff5050
+
+			button
 				margin-top: 10px
 
 		.spacey
