@@ -1,7 +1,6 @@
 var h_data = {}
 //InjectJSON//
-h_data.running = false
-h_data.version = "2.2"
+h_data.version = "2.2.1"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function randomarray(array) {return array[Math.floor(Math.random() * array.length)];}
@@ -31,7 +30,7 @@ function h_clean() {
 }
 
 function h_stop() {
-	console.info("Stopping")
+	console.debug("Stopping")
 	h_clean()
 }
 
@@ -80,7 +79,7 @@ function h_callextension(name, istest) {
 	var data = {}
 	if (!istest) {
 		data.table = h_gettable()
-		data.iswrong = (!h_data.miss === 0) ? (Math.random() * 100 < h_data.miss) : false
+		data.iswrong = (h_data.miss !== 0) ? (Math.random() * 100 < h_data.miss) : false
 	}
 	return { output: window[name](data, istest), iswrong: data.iswrong}
 }
@@ -105,7 +104,7 @@ function h_next() {
 	// We did somethig wrong
 	if (!output.iswrong && h_getwrong() > oldwrong) {
 		h_data.waswrong = false
-		console.warn("I did it wrong!!")
+		console.debug("I did it wrong!!")
 		h_stop()
 		return
 	}
@@ -149,12 +148,12 @@ function h_init() {
 	var path
 
 	if (islocal) {
-		console.info("Running in local mode. if you dont know what this is you did something wrong!")
+		console.debug("Running in local mode. if you dont know what this is you did something wrong!")
 		path = "http://localhost:5500/src/"
 	} else {
 		path = "https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/src/"
 	}
-	console.info("Loading extensions")
+	console.debug("Loading extensions")
 
 	if (islocal) {
 		var extensionlist = JSON.parse(h_request(path + "extensions.json"))
@@ -163,15 +162,15 @@ function h_init() {
 	}
 
 	for (i = 0; i < extensionlist.list.length; i++) {
-		var name = extensionlist.list[i]
+		let name = extensionlist.list[i]
 		if (islocal) {
-			var extension = document.createElement("script")
+			let extension = document.createElement("script")
 			extension.innerHTML = h_request(path + "extensions/" + name + ".js")
 			document.body.append(extension)
 		}
-		var hex = "hex_" + name
+		let hex = "hex_" + name
 		if (h_callextension(hex, true).output) {
-			console.info("Test is: " + name)
+			console.debug("Test is: " + name)
 			h_data.test = hex
 			break
 		}
