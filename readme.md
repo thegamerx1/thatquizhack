@@ -1,29 +1,8 @@
 # Quick Run
-
 ```javascript
-function h_inject() {
-	var xmlHttp = new XMLHttpRequest()
-	xmlHttp.open("GET", "https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/dist/thatquiz.js?_=" + new Date().getTime(), false)
-	xmlHttp.send()
-	var script = document.createElement("script")
-	script.innerHTML = xmlHttp.responseText
-	document.head.append(script)
-}
+function h_inject(){var e=new XMLHttpRequest;e.open("GET","https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/dist/thatquiz.js?_="+(new Date).getTime(),!1),e.send();var t=document.createElement("script");t.innerHTML=e.responseText,document.head.append(t)}
 h_inject()
 ```
 
-# Note
-
-Running the script without the quick run will make it run in local mode
-
 # Known issues
-
 * Fraction math with negative numbers returns numbers with not negative
-
-# Instructions
-
-1. Open debug console
-2. Paste quickrun.js contents
-3. Press `ENTER`
-4. Modify the configuration to ur liking
-5. Press `OK` button
