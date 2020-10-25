@@ -14,9 +14,9 @@ def setstage(name):
 
 	if (setstage.oldtime):
 		elapsed = str(round(time.perf_counter() - setstage.oldtime, 2))
-		print(" (" + elapsed + "ms)")
+		print(" (" + elapsed + "s)")
 
-	print(name, end="")
+	print(name, end="", flush=True)
 	setstage.oldtime = time.perf_counter()
 
 
@@ -26,7 +26,6 @@ extensions = json.loads(readfile("src/extensions.json"))
 javascript = javascript.replace("//InjectJSON//", "h_data.extensionlist = JSON.parse('" + json.dumps(extensions) + "')")
 for i in extensions["list"]:
 	javascript += "\n" + readfile("src/extensions/" + i + ".js")
-
 
 setstage("Compressing..")
 response = requests.post("https://htmlcompressor.com/compress", data={"code": javascript, "code_type": "js", "output_format": "text", "js_engine": "closure", "js_closure_single_line": 1})
