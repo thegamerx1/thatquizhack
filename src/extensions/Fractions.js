@@ -17,12 +17,16 @@ function hex_Fractions(data, istest) {
 
 	if (!cinput && !topinput && !topinput) return "done"
 
+	var topvalue
+	var bottomvalue
+	var cvalue
 	if (decimaldata) {
-		var cvalue = eval(h_tomath(decimaldata.textContent))
+		cvalue = eval(h_tomath(decimaldata.textContent))
 	} else {
-		var mathtype = h_tomath(data.table.querySelector("tbody tr.qq td.qq").innerHTML)
-		var fractionleft = math.fraction(topleftdata.innerHTML, bottomleftdata.innerHTML)
-		var fractionright = math.fraction(toprightdata.innerHTML, bottomrightdata.innerHTML)
+		let mathtype = h_tomath(data.table.querySelector("tbody tr.qq td.qq").innerHTML)
+		let fractionleft = math.fraction(topleftdata.innerHTML, bottomleftdata.innerHTML)
+		let fractionright = math.fraction(toprightdata.innerHTML, bottomrightdata.innerHTML)
+		let out
 		if (mathtype === "*") {
 			out = math.multiply(fractionleft, fractionright)
 		} else if (mathtype === "+") {
@@ -32,16 +36,17 @@ function hex_Fractions(data, istest) {
 		} else if (mathtype === "-") {
 			out = math.subtract(fractionleft, fractionright)
 		}
-		var topvalue = out.n
-		var bottomvalue = out.d
+		topvalue = out.n
+		bottomvalue = out.d
 	}
 
 	// Miss chance
 	if (data.iswrong) {
-		if (random(0, 1)) { // Choose bot or top to do wrong
-			var topvalue = topvalue - random(-20, 20)
+		if (decimaldata) {
+			cvalue -= random(-20, 20)
 		} else {
-			var bottomvalue = bottomvalue - random(-20, 20)
+			topvalue -= random(-20, 20)
+			bottomvalue -= random(-20, 20)
 		}
 	}
 

@@ -10,17 +10,18 @@ function hex_Equality(data, istest) {
 	var leftnum = eval(h_tomath(data.table.querySelector("tbody tr td#A.qq div.nw").innerHTML))
 	var rightnum = eval(h_tomath(data.table.querySelector("tbody tr td#B.qq div.nw").innerHTML))
 
+	var is
 	if (leftnum === rightnum) {
-		var is = buttons["="]
+		is = buttons["="]
 	} else if (leftnum > rightnum) {
-		var is = buttons[">"]
+		is = buttons[">"]
 	} else {
-		var is = buttons["<"]
+		is = buttons["<"]
 	}
 
 	// Miss chance
 	if (data.iswrong) {
-		var is = randomarray(buttons)
+		is = randomobject(buttons)
 	}
 
 	is.click()
