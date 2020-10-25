@@ -12,25 +12,24 @@ function hex_Simplify(data, istest) {
 
 	if (!decimaldata && !topinput && !bottominput) return "done"
 
+	var topvalue
+	var bottomvalue
 	if (decimaldata) {
-		var simplify = math.simplify(decimaldata.textContent.replace(",", "."))
-		var topvalue = simplify.args[0]
-		var bottomvalue = simplify.args[1]
+		let simplify = math.simplify(decimaldata.textContent.replace(",", "."))
+		topvalue = simplify.args[0]
+		bottomvalue = simplify.args[1]
 	} else if (isHidden(bottominput)) {
 		var topvalue = eval(topdata.textContent + "/" + bottomdata.textContent)
 	} else {
-		var simplify = math.simplify(topdata.textContent + "/" + bottomdata.textContent)
-		var topvalue = simplify.args[0]
-		var bottomvalue = simplify.args[1]
+		let simplify = math.simplify(topdata.textContent + "/" + bottomdata.textContent)
+		topvalue = simplify.args[0]
+		bottomvalue = simplify.args[1]
 	}
 
 	// Miss chance
 	if (data.iswrong) {
-		if (random(0,1)) { // Choose bot or top to do wrong
-			var topvalue = topvalue - random(-20, 20)
-		} else {
-			var bottomvalue = bottomvalue - random(-20, 20)
-		}
+		topvalue -= random(-20, 20)
+		bottomvalue -= random(-20, 20)
 	}
 
 	topinput.value = topvalue

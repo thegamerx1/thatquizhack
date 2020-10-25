@@ -6,13 +6,11 @@ function hex_Arithmetic(data, istest) {
 	var input = data.table.querySelector("input#C")
 	if (!input) return "done"
 	// Convert symbols to math
-	var calculation = eval(h_tomath(data.table.querySelector("tbody tr td.qq.nw").innerHTML))
+	var out = eval(h_tomath(data.table.querySelector("tbody tr td.qq.nw").innerHTML))
 
 	// Miss chance
 	if (data.iswrong) {
-		var out = eval(calculation) - random(-20, 20)
-	} else {
-		var out = eval(calculation)
+		out -= random(-20, 20)
 	}
 
 	input.value = out

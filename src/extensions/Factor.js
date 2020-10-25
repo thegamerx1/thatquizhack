@@ -7,15 +7,14 @@ function hex_Factor(data, istest) {
 	var inputc = data.table.querySelector("tbody tr td input#C.Mh")
 	var buttons = { "prime": data.table.querySelector("input#prmN"), "no": data.table.querySelector("input#cmpN")}
 	var factorsbox = data.table.querySelector("div#bo.bo div.jX7")
-	var factorsnum = data.table.querySelector("div#bo.bo table.bZM tbody tr th div.qq")
+	// var factorsnum = data.table.querySelector("div#bo.bo table.bZM tbody tr th div.qq")
 	var factorsbutton = data.table.querySelector("div#bo.bo table.bZM tbody tr td button#OK.u82")
-	var greatestfactorbutton = data.table.querySelector("tbody tr td.bZK.q8s button#OK.u82")
-	var greatestfactortext = data.table.querySelector("div#bo.bo div.qq")
+	// var greatestfactor = data.table.querySelector("div#bo.bo div.qq")
 
-	if (!factorsbox && !buttons.prime && !greatestfactorbutton) return "done"
+	if (!factorsbox && !buttons.prime && !inputc) return "done"
 
 	if (buttons["prime"]) {
-		var isprime = math.isPrime(number.innerHTML)
+		let isprime = math.isPrime(number.innerHTML)
 		if (isprime) {
 			var button = buttons["prime"]
 		} else {
@@ -24,37 +23,48 @@ function hex_Factor(data, istest) {
 	}
 
 	if (factorsbox) {
-		var primes = getPrimeNumbers(factorsnum.innerHTML)
 		var childs = factorsbox.childNodes
-		var choosables = []
-		for (var i = 0; i < childs.length; i++) {
-			if (primes.includes(+childs[i].innerHTML)) {
-				childs[i].click()
-			}
-			choosables.push(childs[i])
-		}
+		var primes = factors.aWT.prans.match(/(\d+)(<sup>(\d+))?/g)
+
+		childs.forEach(button => {
+			primes.forEach(prime => {
+				let match = prime.match(/(\d+)<sup>(\d+)/)
+				let number = prime
+				let timestoloop = 1
+				if (match) {
+					number = match[1]
+					timestoloop = match[2]
+				}
+				if (number === button.innerHTML) {
+					for (let index = 0; index < timestoloop; index++) {
+						button.click()
+					}
+				}
+			})
+		})
 	}
 
-	if (greatestfactorbutton) {
-		var match = greatestfactortext.innerHTML.match(/(\d+)[A-Za-z ]+(\d+)/)
-		var out = math.gcd(match[1], match[2])
-
+	if (inputc) {
+		// var match = inputc.innerHTML.match(/(\d+)[A-Za-z ]+(\d+)/)
+		// var out = math.gcd(match[1], match[2])
+		var out = factors.aWT.prans // <-- Im not sure if this is right maybe should change on the future
 	}
 
-		// Miss chance
+	// Miss chance
 	if (data.iswrong) {
+		console.info("wrong")
 		if (buttons["prime"]) button = randomobject(buttons)
 		if (factorsbox) {
-			randomarray(choosables).click
+			randomarray(childs).click()
 		}
-		if (greatestfactorbutton) out = random(-20, 20)
+		if (inputc) out -= random(-20, 20)
 	}
 
 	if (buttons["prime"]) button.click()
 	if (factorsbox) factorsbutton.click()
-	if (greatestfactorbutton) {
+	if (inputc) {
 		inputc.value = out
-		greatestfactorbutton.click()
+		factors.v86()
 	}
 	return
 }
