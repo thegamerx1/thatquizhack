@@ -149,7 +149,7 @@ function h_init() {
 	var path
 
 	if (islocal) {
-		console.debug("Running in local mode. if you dont know what this is you did something wrong!")
+		console.warn("Running in local mode. if you dont know what this is you did something wrong!")
 		path = "http://localhost:5500/src/"
 	} else {
 		path = "https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/src/"
