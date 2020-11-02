@@ -4,5 +4,5 @@ function h_inject(){var e=new XMLHttpRequest;e.open("GET","https://raw.githubuse
 h_inject()
 ```
 
-# Known issues
-* Fraction math with negative numbers returns numbers with not negative
+# To do
+* Stop btn starts from 0
