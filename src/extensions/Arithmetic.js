@@ -5,10 +5,14 @@ function hex_Arithmetic(data, istest) {
 
 	var input = data.table.querySelector("input#C")
 	if (!input) return "done"
-	// Convert symbols to math
-	var out = eval(h_tomath(data.table.querySelector("tbody tr td.qq.nw").innerHTML))
 
-	// Miss chance
+	// ? Getting data from html
+	// var out = eval(h_tomath(data.table.querySelector("tbody tr td.qq.nw").innerHTML))
+
+	// ? Getting data from variables
+	var out = arithmetic.ca
+
+	// * Miss chance
 	if (data.iswrong) {
 		out -= random(-20, 20)
 	}
