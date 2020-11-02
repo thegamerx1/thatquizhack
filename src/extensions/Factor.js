@@ -7,9 +7,6 @@ function hex_Factor(data, istest) {
 	var inputc = data.table.querySelector("tbody tr td input#C.Mh")
 	var buttons = { "prime": data.table.querySelector("input#prmN"), "no": data.table.querySelector("input#cmpN")}
 	var factorsbox = data.table.querySelector("div#bo.bo div.jX7")
-	// var factorsnum = data.table.querySelector("div#bo.bo table.bZM tbody tr th div.qq")
-	var factorsbutton = data.table.querySelector("div#bo.bo table.bZM tbody tr td button#OK.u82")
-	// var greatestfactor = data.table.querySelector("div#bo.bo div.qq")
 
 	if (!factorsbox && !buttons.prime && !inputc) return "done"
 
@@ -45,23 +42,24 @@ function hex_Factor(data, istest) {
 	}
 
 	if (inputc) {
+		// ? legit way
 		// var match = inputc.innerHTML.match(/(\d+)[A-Za-z ]+(\d+)/)
 		// var out = math.gcd(match[1], match[2])
-		var out = factors.aWT.prans // <-- Im not sure if this is right maybe should change on the future
+
+		// ? variable way
+		var out = factors.aWT.prans
 	}
 
-	// Miss chance
+	// * Miss chance
 	if (data.iswrong) {
 		console.info("wrong")
 		if (buttons["prime"]) button = randomobject(buttons)
-		if (factorsbox) {
-			randomarray(childs).click()
-		}
+		if (factorsbox) randomarray(childs).click()
 		if (inputc) out -= random(-20, 20)
 	}
 
 	if (buttons["prime"]) button.click()
-	if (factorsbox) factorsbutton.click()
+	if (factorsbox) factors.aWc()
 	if (inputc) {
 		inputc.value = out
 		factors.v86()
