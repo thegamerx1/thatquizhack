@@ -17,10 +17,11 @@ function getPrimeNumbers(num) {
 	return array
 }
 function h_tomath(text) {
-	var text = text.replaceAll('×', "*") //Multiply
-	var text = text.replaceAll('÷', "/") //Divison
-	var text = text.replaceAll('–', "-") //Substraction
-	var text = text.replaceAll(',', ".") //Substraction
+	var text = text.replaceAll("×", "*") //Multiply
+	var text = text.replaceAll("÷", "/") //Divison
+	var text = text.replaceAll("–", "-") //Substraction
+	var text = text.replaceAll(",", ".") //Substraction
+	var text = text.replaceAll("|", "")
 	return text
 }
 function h_clean() {
