@@ -1,6 +1,6 @@
 var h_data = {}
 //InjectJSON//
-h_data.version = "2.5"
+h_data.version = "2.6"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function randomarray(array) {return array[Math.floor(Math.random() * array.length)];}
@@ -41,11 +41,16 @@ function h_stop() {
 }
 
 function h_request(url, nocache) {
-	var xmlHttp = new XMLHttpRequest()
-	url += (nocache) ? "?_=" + new Date().getTime() : "?v=" + Math.floor(h_data.version * 100)
-	xmlHttp.open("GET", url, false)
-	xmlHttp.send()
-	return xmlHttp.responseText
+	var xhr = new XMLHttpRequest()
+	url += "?v=" + Math.floor(h_data.version * 100)
+	if (nocache) {
+		xhr.setRequestHeader('cache-control', 'no-cache');
+		xhr.setRequestHeader('cache-control', 'max-age=0');
+		xhr.setRequestHeader('pragma', 'no-cache');
+	}
+	xhr.open("GET", url, false)
+	xhr.send()
+	return xhr.responseText
 }
 
 function h_updateprogress() {
