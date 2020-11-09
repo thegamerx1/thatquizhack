@@ -1,5 +1,5 @@
 $width: 260px
-$height: 350px
+$height: 340px
 
 #h_injectmenu
 	text-align: center
@@ -45,20 +45,39 @@ $height: 350px
 			color: #faf
 
 		form
-			display: none
 			flex: 1
+			display: flex
+			padding: 20px 0
+			justify-content: center
+			flex-direction: column
+			// flex: 1
 
-			input:disabled
-				width: 20%
+			.input-container
+				display: flex
+				flex-flow: row wrap
+				margin-bottom: 10px
+				justify-content: center
+
+			input
+				break-after: always
+				break-before: always
+				width: 80%
 
 			label
-				display: block
-				margin-top: 15px
-				margin-bottom: 3px
+				margin-left: 10%
+				justify-self: normal
+				break-after: avoid
+				user-select: none
 
 			button
+				margin: 0 auto
 				display: block
-				margin-top: 10px
+
+			span
+				font-size: 105%
+				padding-left: 5px
+				color: #cec1aa
+				flex: 1
 
 		.license
 			margin-top: 10px

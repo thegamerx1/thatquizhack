@@ -4,27 +4,31 @@
 			<input type="checkbox" id="h_license" name="h_license"><label for="h_license">I take all responsibility for anything done with this script.</label>
 			<button type="button" onclick="h_license()">Continue</button>
 		</div>
+
 		<form name="h_form">
-			<label for="h_delay">Delay:</label>
-			<div class="input-container">
-				<input type="range" id="h_delay" name="h_delay" value="10000" min="0" max="20000" oninput="h_inputboxie(this, true)">
-				<input id="h_delay_num" value="10" disabled>s
+			<div class="input-container" style="display: none">
+				<label>Time for each:</label><span class="value"></span>
+				<input type="range" name="delay" min="0" max="60" value="30" oninput="h_inputboxietime(this, 's')">
 			</div>
 
-			<label for="h_variation">Variation:</label>
 			<div class="input-container">
-				<input type="range" id="h_variation" name="h_variation" value="3000" min="0" max="5000" oninput="h_inputboxie(this, true)">
-				<input id="h_variation_num" value="3" disabled>s
+				<label>Completion Time:</label><span class="value"></span>
+				<input type="range" name="completion" min="0" max="1800" value="600" oninput="h_inputboxietime(this, true)">
 			</div>
 
-			<label for="h_misschance">Miss chance:</label>
 			<div class="input-container">
-				<input type="range" name="h_misschance" id="h_misschance" min="0" max="25" value="5" oninput="h_inputboxie(this, false)">
-				<input id="h_misschance_num" value="5" disabled>%
+				<label>Variation:</label><span class="value"></span>
+				<input type="range" name="variation" value="10" min="0" max="60" oninput="h_inputboxie(this, 's')">
 			</div>
 
-			<button type="button" onclick="h_apply()">OK</button>
+			<div class="input-container">
+				<label>Miss chance:</label><span class="value"></span>
+				<input type="range" name="misschance" value="5" min="0" max="25" oninput="h_inputboxie(this, '%')">
+			</div>
+
+			<button type="button" onclick="h_apply()">START</button>
 		</form>
+
 		<div class="spacey"></div>
 		<div class="version">
 			<a href="https://github.com/thegamerx1/thatquizhack" target="_blank">New version available!</a>

@@ -26,8 +26,13 @@ function h_tomath(text) {
 }
 function h_clean() {
 	h_data.running = false
+	document.getElementById("h_injectmenu")
+
 	var menu = document.getElementById("h_injectmenu")
+	var hmenu = document.getElementById("h_menu")
+
 	if (menu) menu.remove()
+	if (hmenu) hmenu.remove()
 }
 
 function h_stop() {
@@ -65,9 +70,15 @@ function h_stopbtn() {
 	this.innerHTML = h_data.running ? "Stop" : "Resume"
 }
 
-function h_inputboxie(e, divide) {
+function h_inputboxie(e, postifx, divide) {
 	var value = (divide) ? e.value / 1000 : e.value
-	document.getElementById(e.id + "_num").value = value
+	e.parentElement.querySelector(".value").innerHTML = value + postifx
+}
+
+function h_inputboxietime(e) {
+	var minutes = Math.floor(e.value / 60)
+	var seconds = e.value % 60
+	e.parentElement.querySelector(".value").innerHTML = minutes + "m " + seconds + "s"
 }
 
 function h_license(bypass) {
@@ -128,12 +139,17 @@ function h_apply() {
 	}
 	h_data.running = true
 	var form = document.forms["h_form"]
+	var testlength = document.getElementById("TESTLENGTH").value
+	if (testlength == 101)
+		h_data.delay = form["delay"].value * 1000
+	else
+		h_data.delay = form["completion"].value * 1000 / testlength
 
-	h_data.delay = form["h_delay"].value
-	h_data.variation = form["h_variation"].value
-	h_data.miss = form["h_misschance"].value
+	console.log(h_data.delay + "ms")
+	h_data.variation = form["variation"].value
+	h_data.miss = form["misschance"].value
 
-	h_data.isbrute = (h_data.delay == 0) ? true : false
+	h_data.isbrute = (h_data.delay == 0)
 
 	document.getElementById("h_menu").remove()
 	var injectmenu = document.getElementById("h_injectmenu")
@@ -195,16 +211,28 @@ function h_init() {
 
 	var html = document.createRange().createContextualFragment(html)
 
-	document.body.appendChild(html)
 	document.head.append(style)
+	document.body.appendChild(html)
 
 	if (!islocal && h_data.version !== h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version", true)) {
 		document.querySelector("#h_menu .container .version").style.display = "block"
 	}
+
+	var form = document.forms["h_form"]
 	if (islocal) {
 		h_license(true)
-		document.querySelector("#h_delay").value = 0
-		document.querySelector("#h_misschance").value = 0
+		form["completion"].value = 0
+		form["delay"].value = 0
+		form["misschance"].value = 0
+	}
+	form.querySelectorAll("input").forEach(element => {
+		element.dispatchEvent(new Event("input"))
+	})
+
+	if (document.getElementById("TESTLENGTH").value == 101) {
+		form["delay"].parentElement.style.display = ""
+		form["completion"].parentElement.style.display = "none"
+		console.info("its open")
 	}
 }
 h_init()
