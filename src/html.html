@@ -1,11 +1,11 @@
 <div id="h_menu">
 	<div class="container">
-		<div class="license">
-			<input type="checkbox" id="h_license" name="h_license"><label for="h_license">I take all responsibility for anything done with this script.</label>
+		<form name="h_licenseform" class="license">
+			<input type="checkbox" name="license" value="0"><label>I take all responsibility for anything done with this script.</label>
 			<button type="button" onclick="h_license()">Continue</button>
-		</div>
+		</form>
 
-		<form name="h_form">
+		<form name="h_form" style="display: none">
 			<div class="input-container" style="display: none">
 				<label>Time for each:</label><span class="value"></span>
 				<input type="range" name="delay" min="0" max="60" value="30" oninput="h_inputboxietime(this, 's')">

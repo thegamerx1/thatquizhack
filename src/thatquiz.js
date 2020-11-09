@@ -87,9 +87,10 @@ function h_inputboxietime(e) {
 }
 
 function h_license(bypass) {
-	if (!bypass && !document.querySelector("#h_menu .container .license input").checked) return
-	document.querySelector("#h_menu .container .license").style.display = "none"
-	document.querySelector("#h_menu .container form").style.display = "block"
+	let licenseform = document.forms["h_licenseform"]
+	if (!bypass && !licenseform["license"].checked) return
+	licenseform.remove()
+	document.forms["h_form"].style.display = ""
 }
 
 function h_callextension(name, istest) {
@@ -204,9 +205,9 @@ function h_init() {
 	}
 
 
-	var mathjs = document.createElement("script")
-	mathjs.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.5.1/math.min.js"
-	document.body.append(mathjs)
+	// var mathjs = document.createElement("script")
+	// mathjs.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.5.1/math.min.js"
+	// document.body.append(mathjs)
 
 	var html = h_request(path + "html.html")
 	var css = h_request(path + "css.css")
@@ -216,15 +217,15 @@ function h_init() {
 
 	var html = document.createRange().createContextualFragment(html)
 
-	document.head.append(style)
 	document.body.appendChild(html)
+	document.head.append(style)
 
 	if (!islocal && h_data.version !== h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version", true)) {
 		document.querySelector("#h_menu .container .version").style.display = "block"
 	}
 
 	var form = document.forms["h_form"]
-	if (islocal) {
+	if (false) {
 		h_license(true)
 		form["completion"].value = 0
 		form["delay"].value = 0
@@ -237,7 +238,6 @@ function h_init() {
 	if (document.getElementById("TESTLENGTH").value == 101) {
 		form["delay"].parentElement.style.display = ""
 		form["completion"].parentElement.style.display = "none"
-		console.info("its open")
 	}
 }
 h_init()
