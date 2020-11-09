@@ -1,6 +1,6 @@
 var h_data = {}
 //InjectJSON//
-h_data.version = "2.3"
+h_data.version = "2.5"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function randomarray(array) {return array[Math.floor(Math.random() * array.length)];}
