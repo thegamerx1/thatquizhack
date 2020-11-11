@@ -28,7 +28,7 @@ for i in extensions["list"]:
 	javascript += "\n" + readfile("src/extensions/" + i + ".js")
 
 setstage("Compressing..")
-response = requests.post("https://htmlcompressor.com/compress", data={"code": javascript, "code_type": "js", "output_format": "text", "js_engine": "closure", "js_closure_single_line": 1})
+response = requests.post("https://javascript-minifier.com/raw", data={"input": javascript})
 javascript = response.text
 
 setstage("Done")
