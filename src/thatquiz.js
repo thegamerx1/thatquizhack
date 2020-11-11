@@ -239,6 +239,7 @@ function h_init() {
 	}
 
 	form.querySelectorAll("input").forEach(element => {
+		console.log(element)
 		element.dispatchEvent(new Event("input"))
 	})
 }
