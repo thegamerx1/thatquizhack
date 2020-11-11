@@ -1,12 +1,13 @@
 var h_data = {}
 //InjectJSON//
-h_data.version = "2.6.1"
+h_data.version = "2.62"
 
 function random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min}
 function randomarray(array) {return array[Math.floor(Math.random() * array.length)];}
 function h_gettable() {return document.querySelector("#cnvbb") || document.querySelector("#centertext")}
 function isHidden(el) {var style = window.getComputedStyle(el);return (style.display === 'none')}
 function randomobject(obj) {var keys = Object.keys(obj);return obj[keys[Math.floor(Math.random() * keys.length)]]}
+function stripHtml(html) {let tmp = document.createElement("DIV");tmp.innerHTML = html;return tmp.textContent || tmp.innerText || "";}
 function getPrimeNumbers(num) {
 	var half = Math.floor(num / 2)
 	var array = [1]
@@ -81,9 +82,21 @@ function h_inputboxie(e, postifx, divide) {
 }
 
 function h_inputboxietime(e) {
-	var minutes = Math.floor(e.value / 60)
-	var seconds = e.value % 60
-	e.parentElement.querySelector(".value").innerHTML = minutes + "m " + seconds + "s"
+	var total = e.parentElement.querySelectorAll(".value")[1]
+	var each = e.parentElement.querySelectorAll(".value")[0]
+	var testlength = document.getElementById("TESTLENGTH").value
+
+	if (testlength != 101) {
+		var value = e.value * testlength
+		var minutes = Math.floor(value / 60)
+		var seconds = value % 60
+		total.innerHTML = "~" + minutes + "m " + seconds + "s"
+		total.removeAttribute("hide")
+	} else {
+		total.innerHTML = ""
+		total.setAttribute("hide", "true")
+	}
+	each.innerHTML = e.value + "s"
 }
 
 function h_license(bypass) {
@@ -128,7 +141,7 @@ function h_next() {
 	}
 
 	var sleep = (h_data.isbrute) ? 0 : random(+h_data.delay - +h_data.variation, +h_data.delay + +h_data.variation)
-	if (sleep !== 0) {
+	if (sleep != 0) {
 		h_data.waittime = sleep
 		h_data.progresstart = new Date()
 		document.getElementById("h_progress").style.width = 0
@@ -145,13 +158,7 @@ function h_apply() {
 	}
 	h_data.running = true
 	var form = document.forms["h_form"]
-	var testlength = document.getElementById("TESTLENGTH").value
-	if (testlength == 101)
-		h_data.delay = form["delay"].value * 1000
-	else
-		h_data.delay = form["completion"].value * 1000 / testlength
-
-	console.log(h_data.delay + "ms")
+	h_data.delay = form["delay"].value * 1000
 	h_data.variation = form["variation"].value
 	h_data.miss = form["misschance"].value
 
@@ -225,19 +232,14 @@ function h_init() {
 	}
 
 	var form = document.forms["h_form"]
-	if (false) {
+	if (islocal) {
 		h_license(true)
-		form["completion"].value = 0
 		form["delay"].value = 0
 		form["misschance"].value = 0
 	}
+
 	form.querySelectorAll("input").forEach(element => {
 		element.dispatchEvent(new Event("input"))
 	})
-
-	if (document.getElementById("TESTLENGTH").value == 101) {
-		form["delay"].parentElement.style.display = ""
-		form["completion"].parentElement.style.display = "none"
-	}
 }
 h_init()
