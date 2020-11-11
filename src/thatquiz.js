@@ -43,13 +43,17 @@ function h_stop() {
 
 function h_request(url, nocache) {
 	var xhr = new XMLHttpRequest()
-	url += "?v=" + Math.floor(h_data.version * 100)
-	if (nocache) {
-		xhr.setRequestHeader('cache-control', 'no-cache');
-		xhr.setRequestHeader('cache-control', 'max-age=0');
-		xhr.setRequestHeader('pragma', 'no-cache');
+	if (!nocache) {
+		url += "?v=" + Math.floor(h_data.version * 100)
+	} else {
+		url += "?nocache=" + new Date().getTime()
 	}
 	xhr.open("GET", url, false)
+	// if (nocache) {
+	// 	xhr.setRequestHeader('cache-control', 'no-cache');
+	// 	xhr.setRequestHeader('cache-control', 'max-age=0');
+	// 	xhr.setRequestHeader('pragma', 'no-cache');
+	// }
 	xhr.send()
 	return xhr.responseText
 }
@@ -211,11 +215,6 @@ function h_init() {
 		return
 	}
 
-
-	// var mathjs = document.createElement("script")
-	// mathjs.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.5.1/math.min.js"
-	// document.body.append(mathjs)
-
 	var html = h_request(path + "html.html")
 	var css = h_request(path + "css.css")
 
@@ -226,10 +225,6 @@ function h_init() {
 
 	document.body.appendChild(html)
 	document.head.append(style)
-
-	if (!islocal && h_data.version !== h_request("https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/version", true)) {
-		document.querySelector("#h_menu .container .version").style.display = "block"
-	}
 
 	var form = document.forms["h_form"]
 	if (islocal) {
