@@ -6,16 +6,10 @@
 		</form>
 
 		<form name="h_form" style="display: none">
-			<div class="input-container" style="display: none">
-				<label>Time for each:</label><span class="value"></span>
+			<div class="input-container">
+				<label>Time for each:</label><span class="value"></span><span class="value"></span>
 				<input type="range" name="delay" min="0" max="60" value="30" oninput="h_inputboxietime(this, 's')">
 			</div>
-
-			<div class="input-container">
-				<label>Completion Time:</label><span class="value"></span>
-				<input type="range" name="completion" min="0" max="1800" value="600" oninput="h_inputboxietime(this, true)">
-			</div>
-
 			<div class="input-container">
 				<label>Variation:</label><span class="value"></span>
 				<input type="range" name="variation" value="10" min="0" max="60" oninput="h_inputboxie(this, 's')">
