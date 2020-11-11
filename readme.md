@@ -1,7 +1,6 @@
 ![GitHub file size in bytes](https://img.shields.io/github/size/thegamerx1/thatquizhack/dist/thatquiz.js?label=Release%20Size&style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/thegamerx1/thatquizhack?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io/github/last-commit/thegamerx1/thatquizhack?style=for-the-badge)
-[![HitCount](http://hits.dwyl.com/thegamerx1/thatquizhack.svg)](http://hits.dwyl.com/thegamerx1/thatquizhack)
 
 # Quick Run
 ```javascript
