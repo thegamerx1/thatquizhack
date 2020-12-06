@@ -5,7 +5,7 @@ import time
 def readfile(file):
 	with open(file, "r") as f:
 		return f.read()
-
+#
 def setstage(name):
 	try:
 		setstage.oldtime
@@ -23,10 +23,11 @@ def setstage(name):
 setstage("Appending extensions..")
 javascript = readfile("src/thatquiz.js")
 extensions = json.loads(readfile("src/extensions.json"))
-javascript = javascript.replace("//InjectJSON//", "h_data.extensionlist = JSON.parse('" + json.dumps(extensions) + "')")
+javascript = javascript.replace("//InjectJSON//", "this.extension.list = JSON.parse('" + json.dumps(extensions) + "')")
+adddata = ""
 for i in extensions["list"]:
-	javascript += "\n" + readfile("src/extensions/" + i + ".js")
-
+	adddata += f"this.extension.func.{i} = {readfile(f'src/extensions/{i}.js')}\n"
+javascript = javascript.replace("//InjectExtensions//", adddata)
 setstage("Compressing..")
 response = requests.post("https://javascript-minifier.com/raw", data={"input": javascript})
 javascript = response.text
