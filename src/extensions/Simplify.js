@@ -1,4 +1,4 @@
-function hex_Simplify(data, istest) {
+function Simplify(data, istest) {
 	if (istest) {
 		return (typeof reducef === 'object' && reducef !== null)
 	}

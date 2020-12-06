@@ -1,4 +1,4 @@
-function hex_Factor(data, istest) {
+function Factor(data, istest) {
 	if (istest) {
 		return (typeof factors === 'object' && factors !== null)
 	}

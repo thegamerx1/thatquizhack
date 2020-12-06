@@ -1,4 +1,4 @@
-function hex_Fractions(data, istest) {
+function Fractions(data, istest) {
 	if (istest) {
 		return (typeof fraction === 'object' && fraction !== null)
 	}
