@@ -1,9 +1,11 @@
 hackclass = class {
 	init() {
 		this.version = "2.65"
-		// this.extensionlist = //InjectJSON//
-		//TODO: fix python
-		this.islocal = (!this.extensionlist)
+		this.extension = {}
+		//InjectJSON//
+		this.extension.func = {}
+		//InjectExtensions//
+		this.islocal = (!this.extension.list)
 
 		var path
 		if (this.islocal) {
@@ -14,34 +16,24 @@ hackclass = class {
 		}
 
 		this.log("Loading extensions")
-		var extensionlist
-		if (this.islocal) {
-			extensionlist = JSON.parse(this.request(path + "extensions.json"))
-		} else {
-			extensionlist = this.extensionlist
-		}
+		this.extension.list = (this.islocal) ? JSON.parse(this.request(path + "extensions.json")) : this.extension.list
 
-		// TODO: maybe make each extension a string and eval() ?
-		for (i = 0; i < extensionlist.list.length; i++) {
-			let name = extensionlist.list[i]
+		//  ? Load extensions
+		for (i = 0; i < this.extension.list.list.length; i++) {
+			let name = this.extension.list.list[i]
+			this.log(name)
 			if (this.islocal) {
-				let extension = document.createElement("script")
-				extension.innerHTML = this.request(path + "extensions/" + name + ".js")
-				document.body.append(extension)
+				this.extension.func[name] = eval(this.request(path + "extensions/" + name + ".js") + name)
 			}
 
-			let hex = "hex_" + name
-			if (this.callextension(hex, true).output) {
+			if (this.callextension(name, true).output) {
 				this.log("Test is: " + name)
-				this.test = hex
+				this.test = name
 				break
 			}
 		}
 
-		if (!this.test) {
-			this.log("Could not find a extension for current test.")
-			return
-		}
+		if (!this.test) return this.log("Could not find a extension for current test.")
 
 		var html = this.request(path + "html.html")
 		var css = this.request(path + "css.css")
@@ -70,14 +62,14 @@ hackclass = class {
 	}
 
 	log(text, ...args) {
-		if (!this.islocal) return
+		// if (!this.islocal) return
 		args = (args.length > 0 ? args : 0)
 		console.log("%c[Hack]", 'background: #222; color: #ff7c55', text, args)
 	}
 	random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min }
 	randomarray(array) { return array[Math.floor(Math.random() * array.length)]; }
 	gettable() { return document.querySelector("#cnvbb") || document.querySelector("#centertext") }
-	// TODO: check if work
+	// TODO: check if worky
 	isHidden(el) { return (el.style.display === "none")}
 	randomobject(obj) { var keys = Object.keys(obj); return obj[keys[Math.floor(Math.random() * keys.length)]] }
 	stripHtml(html) { let tmp = document.createElement("DIV"); tmp.innerHTML = html; return tmp.textContent || tmp.innerText || ""; }
@@ -130,7 +122,6 @@ hackclass = class {
 		var value = Date.now() - this.progresstart
 		this.hackinjectmenu.querySelector("[name=progress]").style.width = value / this.waittime * 100 + "%"
 		if (!(value >= this.waittime)) {
-			// TODO: it works?
 			setTimeout(this.updateprogress.bind(this), 50)
 		}
 	}
@@ -184,7 +175,7 @@ hackclass = class {
 			data.table = this.gettable()
 			data.iswrong = (this.miss !== 0) ? (Math.random() * 100 < this.miss) : false
 		}
-		return { output: window[name](data, istest), iswrong: data.iswrong }
+		return { output: this.extension.func[name](data, istest), iswrong: data.iswrong }
 	}
 
 	getwrong() {
@@ -224,7 +215,6 @@ hackclass = class {
 		this.log(event)
 
 		if (event.code === "Space") {
-			this.log("call")
 			this.next()
 		}
 	}
@@ -252,6 +242,7 @@ hackclass = class {
 		}
 	}
 }
+
 if (typeof hack == "object") hack.stop()
 var hack = new hackclass()
 hack.init()
