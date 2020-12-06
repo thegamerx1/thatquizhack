@@ -1,7 +1,7 @@
 $width: 260px
 $height: 340px
 
-#h_injectmenu
+#hackinjectmenu
 	text-align: center
 
 	.progress-wrap
@@ -19,7 +19,7 @@ $height: 340px
 		margin: 2px auto 10px
 		padding: 4px 1ex
 
-#h_menu
+#hackmenu
 	color: #b8b8b8
 	position: fixed
 	width: $width
@@ -44,7 +44,7 @@ $height: 340px
 		a
 			color: #faf
 
-		form[name=h_form]
+		form[name=hackform]
 			flex: 1
 			display: flex
 			padding: 20px 0
@@ -55,12 +55,13 @@ $height: 340px
 				display: flex
 				flex-flow: row wrap
 				margin-bottom: 10px
-				justify-content: center
+				// justify-content: center
 
-			input
+			input[type="range"]
 				break-after: always
 				break-before: always
 				width: 80%
+				margin: 0 auto
 
 			label
 				margin-left: 10%
