@@ -14,7 +14,7 @@ function hex_Arithmetic(data, istest) {
 
 	// * Miss chance
 	if (data.iswrong) {
-		out -= random(-20, 20)
+		out -= hack.random(-20, 20)
 	}
 
 	input.value = out

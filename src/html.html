@@ -1,26 +1,32 @@
-<div id="h_menu">
+<div id="hackmenu">
 	<div class="container">
-		<form name="h_licenseform" class="license">
+		<form name="hacklicense" class="license">
 			<input type="checkbox" name="license" value="0"><label>I take all responsibility for anything done with this script.</label>
-			<button type="button" onclick="h_license()">Continue</button>
+			<button type="button" onclick="hack.license()">Continue</button>
 		</form>
 
-		<form name="h_form" style="display: none">
+		<form name="hackform" style="display: none">
 			<div class="input-container">
 				<label>Time for each:</label><span class="value"></span><span class="value"></span>
-				<input type="range" name="delay" min="0" max="60" value="30" oninput="h_inputboxietime(this, 's')">
+				<input type="range" name="delay" min="0" max="60" value="30" oninput="hack.inputboxietime(this, 's')">
 			</div>
 			<div class="input-container">
 				<label>Variation:</label><span class="value"></span>
-				<input type="range" name="variation" value="10" min="0" max="60" oninput="h_inputboxie(this, 's')">
+				<input type="range" name="variation" value="10" min="0" max="60" oninput="hack.inputboxie(this, 's')">
 			</div>
 
 			<div class="input-container">
 				<label>Miss chance:</label><span class="value"></span>
-				<input type="range" name="misschance" value="5" min="0" max="25" oninput="h_inputboxie(this, '%')">
+				<input type="range" name="misschance" value="5" min="0" max="25" oninput="hack.inputboxie(this, '%')">
 			</div>
 
-			<button type="button" onclick="h_apply()">START</button>
+			<div class="input-container">
+				<label>Test Mode:
+					<input type="checkbox" name="istest">
+				</label>
+			</div>
+
+			<button type="button" onclick="hack.apply()">START</button>
 		</form>
 
 		<div class="spacey"></div>
@@ -36,9 +42,9 @@
 	</div>
 </div>
 
-<div id="h_injectmenu" hidden>
+<div id="hackinjectmenu" hidden>
 	<div class="progress-wrap">
-		<div class="progress" id="h_progress"></div>
+		<div class="progress" name="progress"></div>
 	</div>
-	<button type="button" id="h_stopbtn">Stop</button>
+	<button type="button" onclick="hack.stopbtn()">Stop</button>
 </div>
