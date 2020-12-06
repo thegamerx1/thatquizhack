@@ -35,8 +35,8 @@ hackclass = class {
 
 		if (!this.test) return this.log("Could not find a extension for current test.")
 
-		var html = this.request(path + "html.html")
-		var css = this.request(path + "css.css")
+		var html = (this.islocal) ? this.request(path + "html.html") : this.extension.html
+		var css = (this.islocal) ? this.request(path + "css.css") : this.extension.css
 
 		var style = document.createElement("style")
 		style.innerHTML = css
@@ -69,7 +69,6 @@ hackclass = class {
 	random(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min }
 	randomarray(array) { return array[Math.floor(Math.random() * array.length)]; }
 	gettable() { return document.querySelector("#cnvbb") || document.querySelector("#centertext") }
-	// TODO: check if worky
 	isHidden(el) { return (el.style.display === "none")}
 	randomobject(obj) { var keys = Object.keys(obj); return obj[keys[Math.floor(Math.random() * keys.length)]] }
 	stripHtml(html) { let tmp = document.createElement("DIV"); tmp.innerHTML = html; return tmp.textContent || tmp.innerText || ""; }
