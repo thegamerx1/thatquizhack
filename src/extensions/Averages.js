@@ -1,4 +1,4 @@
-function hex_Averages(data, istest) {
+function Averages(data, istest) {
 	if (istest) {
 		return (typeof sets === 'object' && sets !== null)
 	}

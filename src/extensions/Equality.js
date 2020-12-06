@@ -1,4 +1,4 @@
-function hex_Equality(data, istest) {
+function Equality(data, istest) {
 	if (istest) {
 		return (typeof inequality === 'object' && inequality !== null)
 	}

@@ -1,4 +1,4 @@
-function hex_Arithmetic(data, istest) {
+function Arithmetic(data, istest) {
 	if (istest) {
 		return (typeof arithmetic === 'object' && arithmetic !== null)
 	}

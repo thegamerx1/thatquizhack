@@ -1,4 +1,4 @@
-function hex_Exponents(data, istest) {
+function Exponents(data, istest) {
 	if (istest) {
 		return (typeof exponent === 'object' && exponent !== null)
 	}

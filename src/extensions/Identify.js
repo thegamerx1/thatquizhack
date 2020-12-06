@@ -1,4 +1,4 @@
-function hex_Identify(data, istest) {
+function Identify(data, istest) {
 	if (istest) {
 		return (typeof idfraction === 'object' && idfraction !== null)
 	}
