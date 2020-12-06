@@ -27,6 +27,8 @@ javascript = javascript.replace("//InjectJSON//", "this.extension.list = JSON.pa
 adddata = ""
 for i in extensions["list"]:
 	adddata += f"this.extension.func.{i} = {readfile(f'src/extensions/{i}.js')}\n"
+adddata += f"this.extension.html = `{readfile(f'src/html.html')}`\n"
+adddata += f"this.extension.css = `{readfile(f'src/css.css')}`\n"
 javascript = javascript.replace("//InjectExtensions//", adddata)
 setstage("Compressing..")
 response = requests.post("https://javascript-minifier.com/raw", data={"input": javascript})
