@@ -234,6 +234,7 @@ hackclass = class {
 		var injectmenu = document.getElementById("hackinjectmenu")
 		document.getElementById("bz1x").after(injectmenu)
 		if (this.istest) {
+			this.miss = 0
 			document.addEventListener("keydown", this.nexttest.bind(this), false);
 		} else {
 			injectmenu.hidden = false
