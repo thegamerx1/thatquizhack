@@ -6,7 +6,7 @@ function Exponents(data, istest) {
 	var cinput = data.table.querySelector("input#C")
 	var dinput = data.table.querySelector("input#D")
 
-	var stripped = stripHtml(exponent.ca)
+	var stripped = hack.stripHtml(exponent.ca)
 	if (dinput) {
 		let match = stripped.match(/(.*)\/(.*)/)
 		var cvalue = match[1]
