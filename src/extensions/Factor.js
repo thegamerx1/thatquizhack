@@ -53,8 +53,8 @@ function Factor(data, istest) {
 	// * Miss chance
 	if (data.iswrong) {
 		console.info("wrong")
-		if (buttons["prime"]) button = randomobject(buttons)
-		if (factorsbox) randomarray(childs).click()
+		if (buttons["prime"]) button = hack.randomobject(buttons)
+		if (factorsbox) hack.randomarray(childs).click()
 		if (inputc) out -= random(-20, 20)
 	}
 

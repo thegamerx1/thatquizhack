@@ -52,10 +52,10 @@ function Fractions(data, istest) {
 
 	// * Miss chance
 	if (data.iswrong) {
-		cvalue -= random(-20, 20)
-		topvalue -= random(-20, 20)
-		bottomvalue -= random(-20, 20)
-		extravalue -= random(-20, 20)
+		cvalue -= hack.random(-20, 20)
+		topvalue -= hack.random(-20, 20)
+		bottomvalue -= hack.random(-20, 20)
+		extravalue -= hack.random(-20, 20)
 	}
 
 	if (cinput) {

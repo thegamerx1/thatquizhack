@@ -38,8 +38,8 @@ function Simplify(data, istest) {
 
 	// * Miss chance
 	if (data.iswrong) {
-		topvalue -= random(-20, 20)
-		bottomvalue -= random(-20, 20)
+		topvalue -= hack.random(-20, 20)
+		bottomvalue -= hack.random(-20, 20)
 	}
 
 	topinput.value = topvalue

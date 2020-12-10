@@ -26,7 +26,7 @@ function Identify(data, istest) {
 			cvalue -= random(-20, 20)
 			dvalue -= random(-20, 20)
 		} else if (box) {
-			randomarray(box.parentElement.childNodes).click()
+			hack.randomarray(box.parentElement.childNodes).click()
 		}
 	}
 
