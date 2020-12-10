@@ -24,7 +24,7 @@ function Equality(data, istest) {
 
 	// * Miss chance
 	if (data.iswrong) {
-		is = randomobject(buttons)
+		is = hack.randomobject(buttons)
 	}
 
 	is.click()

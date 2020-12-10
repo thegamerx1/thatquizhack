@@ -17,8 +17,8 @@ function Exponents(data, istest) {
 
 	// * Miss chance
 	if (data.iswrong) {
-		cvalue -= random(-20, 20)
-		dvalue -= random(-20, 20)
+		cvalue -= hack.random(-20, 20)
+		dvalue -= hack.random(-20, 20)
 	}
 
 	cinput.value = cvalue

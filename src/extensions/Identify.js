@@ -23,8 +23,8 @@ function Identify(data, istest) {
 	// * Miss chance
 	if (data.iswrong) {
 		if (cinput && dinput) {
-			cvalue -= random(-20, 20)
-			dvalue -= random(-20, 20)
+			cvalue -= hack.random(-20, 20)
+			dvalue -= hack.random(-20, 20)
 		} else if (box) {
 			hack.randomarray(box.parentElement.childNodes).click()
 		}
