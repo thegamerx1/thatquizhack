@@ -55,7 +55,7 @@ function Factor(data, istest) {
 		console.info("wrong")
 		if (buttons["prime"]) button = hack.randomobject(buttons)
 		if (factorsbox) hack.randomarray(childs).click()
-		if (inputc) out -= random(-20, 20)
+		if (inputc) out -= hack.random(-20, 20)
 	}
 
 	if (buttons["prime"]) button.click()

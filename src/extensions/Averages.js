@@ -24,8 +24,8 @@ function Averages(data, istest) {
 
 	// * Miss chancece
 	if (data.iswrong) {
-		cvalue -= random(-20,20)
-		if (dinput) dvalue -= random(-20,20)
+		cvalue -= hack.random(-20,20)
+		if (dinput) dvalue -= hack.random(-20,20)
 	}
 
 	cinput.value = cvalue
