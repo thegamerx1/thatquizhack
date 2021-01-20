@@ -1,6 +1,6 @@
 function Factor(data, istest) {
 	if (istest) {
-		return (typeof factors === 'object' && factors !== null)
+		return (typeof factors === "object")
 	}
 
 	var number = data.table.querySelector("table thead tr td.qq")
@@ -11,12 +11,7 @@ function Factor(data, istest) {
 	if (!factorsbox && !buttons.prime && !inputc) return "done"
 
 	if (buttons["prime"]) {
-		let isprime = math.isPrime(number.innerHTML)
-		if (isprime) {
-			var button = buttons["prime"]
-		} else {
-			var button = buttons["no"]
-		}
+		var button = (factors.a6h.hasOwnProperty(number.innerHTML)) ? buttons.prime : buttons.no
 	}
 
 	if (factorsbox) {
@@ -41,21 +36,13 @@ function Factor(data, istest) {
 		})
 	}
 
-	if (inputc) {
-		// ? legit way
-		// var match = inputc.innerHTML.match(/(\d+)[A-Za-z ]+(\d+)/)
-		// var out = math.gcd(match[1], match[2])
-
-		// ? variable way
-		var out = factors.aWT.prans
-	}
+	if (inputc) var out = factors.aWT.prans
 
 	// * Miss chance
 	if (data.iswrong) {
-		console.info("wrong")
 		if (buttons["prime"]) button = hack.randomobject(buttons)
 		if (factorsbox) hack.randomarray(childs).click()
-		if (inputc) out -= hack.random(-20, 20)
+		if (inputc) out = hack.random(0, 40)
 	}
 
 	if (buttons["prime"]) button.click()
