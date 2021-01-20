@@ -1,6 +1,6 @@
 hackclass = class {
 	init() {
-		this.version = "2.65"
+		this.version = "2.7"
 		this.extension = {}
 		//InjectJSON//
 		this.extension.func = {}
@@ -240,19 +240,18 @@ hackclass = class {
 	}
 
 	hackyInject() {
-		let window = this.frame.contentWindow
-		let script = document.createElement("script")
-		script.src = this.islocal ? this.path + "src/thatquiz.js" : this.path + "dist/thatquiz.js"
-		window.document.body.append(script)
-		script.onload = () => {
-			let form = window.document.forms["hackform"]
-			form["delay"].value = this.delay / 1000 / document.querySelector(".doing td.numeric.w8o").innerHTML
-			form["variation"].value = this.variation
-			form["misschance"].value = this.miss
-			window.hack.license(true)
-			window.hack.apply()
-		}
 		this.frame.contentWindow.addEventListener("hacked", this.hackyNext.bind(this, true))
+		let window = this.frame.contentWindow
+		let xmlHttp = new XMLHttpRequest()
+		xmlHttp.open("GET", this.path + (this.islocal ? "src/thatquiz.js" : "dist/thatquiz.js?_=" + new Date().getTime()), false)
+		xmlHttp.send()
+		window.eval(xmlHttp.responseText)
+		let form = window.document.forms["hackform"]
+		form["delay"].value = this.delay / 1000 / document.querySelector(".doing td.numeric.w8o").innerHTML
+		form["variation"].value = this.variation
+		form["misschance"].value = this.miss
+		window.hack.license(true)
+		window.hack.apply()
 	}
 
 	apply() {
