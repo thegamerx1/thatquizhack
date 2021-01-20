@@ -1,6 +1,6 @@
 function Equality(data, istest) {
 	if (istest) {
-		return (typeof inequality === 'object' && inequality !== null)
+		return (typeof inequality == "object")
 	}
 
 	var buttons = { ">": data.table.querySelector("tbody tr th#GTA.vam button"), "=": data.table.querySelector("tbody tr th#EQA.vam button"), "<": data.table.querySelector("tbody tr th#LTA.vam button")}

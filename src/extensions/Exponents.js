@@ -1,6 +1,6 @@
 function Exponents(data, istest) {
 	if (istest) {
-		return (typeof exponent === 'object' && exponent !== null)
+		return (typeof exponent == "object")
 	}
 
 	var cinput = data.table.querySelector("input#C")
@@ -17,8 +17,8 @@ function Exponents(data, istest) {
 
 	// * Miss chance
 	if (data.iswrong) {
-		cvalue -= hack.random(-20, 20)
-		dvalue -= hack.random(-20, 20)
+		cvalue = hack.random(0, 40)
+		dvalue = hack.random(0, 40)
 	}
 
 	cinput.value = cvalue
