@@ -5,6 +5,7 @@ function Exponents(data, istest) {
 
 	var cinput = data.table.querySelector("input#C")
 	var dinput = data.table.querySelector("input#D")
+	if (!cinput && !dinput) return "done"
 
 	var stripped = hack.stripHtml(exponent.ca)
 	if (dinput) {
