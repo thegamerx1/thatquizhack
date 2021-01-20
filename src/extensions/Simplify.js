@@ -1,6 +1,6 @@
 function Simplify(data, istest) {
 	if (istest) {
-		return (typeof reducef === 'object' && reducef !== null)
+		return (typeof reducef == "object")
 	}
 
 	var topinput = data.table.querySelector("input#C")
