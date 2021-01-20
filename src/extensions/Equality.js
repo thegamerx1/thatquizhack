@@ -4,7 +4,7 @@ function Equality(data, istest) {
 	}
 
 	var buttons = { ">": data.table.querySelector("tbody tr th#GTA.vam button"), "=": data.table.querySelector("tbody tr th#EQA.vam button"), "<": data.table.querySelector("tbody tr th#LTA.vam button")}
-
+	if (!buttons[">"]) return "done"
 
 	// ? Getting html
 	// var leftnum = eval(h_tomath(data.table.querySelector("tbody tr td#A.qq div.nw").innerHTML))

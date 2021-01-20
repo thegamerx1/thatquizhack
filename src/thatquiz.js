@@ -1,6 +1,6 @@
 hackclass = class {
 	init() {
-		this.version = "2.7"
+		this.version = "2.71"
 		this.extension = {}
 		//InjectJSON//
 		this.extension.func = {}
