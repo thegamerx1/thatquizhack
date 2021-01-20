@@ -1,6 +1,6 @@
 function Arithmetic(data, istest) {
 	if (istest) {
-		return (typeof arithmetic === 'object' && arithmetic !== null)
+		return (typeof arithmetic == "object")
 	}
 
 	var input = data.table.querySelector("input#C")
@@ -14,7 +14,7 @@ function Arithmetic(data, istest) {
 
 	// * Miss chance
 	if (data.iswrong) {
-		out -= hack.random(-20, 20)
+		out = hack.random(0, 40)
 	}
 
 	input.value = out

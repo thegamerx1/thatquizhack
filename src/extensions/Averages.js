@@ -1,6 +1,6 @@
 function Averages(data, istest) {
 	if (istest) {
-		return (typeof sets === 'object' && sets !== null)
+		return (typeof sets == "object")
 	}
 
 	// TODO: Fractions dont work
@@ -24,8 +24,8 @@ function Averages(data, istest) {
 
 	// * Miss chancece
 	if (data.iswrong) {
-		cvalue -= hack.random(-20,20)
-		if (dinput) dvalue -= hack.random(-20,20)
+		cvalue = hack.random(0, 40)
+		if (dinput) dvalue = hack.random(0, 40)
 	}
 
 	cinput.value = cvalue

@@ -1,6 +1,6 @@
 function Identify(data, istest) {
 	if (istest) {
-		return (typeof idfraction === 'object' && idfraction !== null)
+		return (typeof idfraction == "object")
 	}
 
 	var cinput = data.table.querySelector("input#C")
@@ -23,8 +23,8 @@ function Identify(data, istest) {
 	// * Miss chance
 	if (data.iswrong) {
 		if (cinput && dinput) {
-			cvalue -= hack.random(-20, 20)
-			dvalue -= hack.random(-20, 20)
+			cvalue = hack.random(0, 40)
+			dvalue = hack.random(0, 40)
 		} else if (box) {
 			hack.randomarray(box.parentElement.childNodes).click()
 		}
