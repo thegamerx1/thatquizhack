@@ -19,6 +19,10 @@ $height: 340px
 		margin: 2px auto 10px
 		padding: 4px 1ex
 
+iframe#hackyFrame
+	width: 100%
+	height: 500px
+
 #hackmenu
 	color: #b8b8b8
 	position: fixed
@@ -55,7 +59,6 @@ $height: 340px
 				display: flex
 				flex-flow: row wrap
 				margin-bottom: 10px
-				// justify-content: center
 
 			input[type="range"]
 				break-after: always
@@ -67,7 +70,6 @@ $height: 340px
 				margin-left: 10%
 				break-after: avoid
 				user-select: none
-				// flex: 1
 
 			button
 				margin: 0 auto
@@ -76,11 +78,14 @@ $height: 340px
 			span
 				padding-left: 5px
 				font-size: 105%
-
-			span:last-of-type
-				flex: 1
-				color: #c4ac84
-				justify-content: flex-end
+				&:last-of-type
+					flex: 1
+					color: #c4ac84
+					justify-content: flex-end
+				&:not(:last-of-type)
+					font-size: 95%
+				&.total
+					font-size: 90%
 
 		.license
 			margin-top: 10px
@@ -102,3 +107,8 @@ $height: 340px
 			.who
 				flex: 1 1 40vw
 				text-align: center
+
+.done
+	background: #6cff73 !important
+.doing
+	background: #fff782 !important
