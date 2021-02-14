@@ -1,11 +1,11 @@
 hackclass = class {
 	init() {
-		this.version = "2.71"
+		this.version = "2.79"
 		this.extension = {}
 		//InjectJSON//
 		this.extension.func = {}
 		//InjectExtensions//
-		this.islocal = (!this.extension.list)
+		this.islocal = typeof h_isrelease == "undefined"
 
 		if (this.islocal) {
 			this.log("Running in LOCAL mode!")
@@ -26,9 +26,8 @@ hackclass = class {
 			}
 		} else {
 			this.log("Loading extensions")
-			this.extension.list = (this.islocal) ? JSON.parse(this.request(this.path + "src/extensions.json")) : this.extension.list
-
-			//  ? Load extensions
+			if (this.islocal)
+				this.extension.list = JSON.parse(this.request(this.path + "src/extensions.json"))
 			for (i = 0; i < this.extension.list.list.length; i++) {
 				let name = this.extension.list.list[i]
 				if (this.islocal) {
