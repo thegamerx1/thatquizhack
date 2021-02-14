@@ -3,6 +3,8 @@ function h_run() {
 	xmlHttp.open("GET", "https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/dist/thatquiz.js?_=" + new Date().getTime(), false)
 	xmlHttp.send()
 	h_isrelease = true
-	eval(xmlHttp.responseText)
+	script = document.createElement("script")
+	script.innerHTML = xmlHttp.responseText
+	document.body.append(script)
 }
 h_run()
