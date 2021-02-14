@@ -9,7 +9,7 @@ script := StrReplace(script, "//InjectJSON//", "this.extension.list = JSON.parse
 adddata := ""
 for _, value in extensions.list {
 	debug.print(value " ", {end: ""})
-	adddata .= addFile(value, "src/extensions/" value ".js", false, false)
+	adddata .= addFile("func." value, "src/extensions/" value ".js", false, false)
 }
 debug.print()
 
@@ -35,7 +35,7 @@ addFile(name, file, replace := false, wrap := true) {
 	if replace
 		out := StrReplace(out, "`r`n", "")
 	wrap := wrap ? "``" : ""
-	return "this.extension.func." name " = " wrap out wrap "`n"
+	return "this.extension." name " = " wrap out wrap "`n"
 }
 #include <JSON>
 #include <debug>
