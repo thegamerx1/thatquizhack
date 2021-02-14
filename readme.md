@@ -4,7 +4,7 @@
 
 # Quick Run
 ```javascript
-function h_run(){var a=new XMLHttpRequest();a.open("GET","https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/dist/thatquiz.js?_="+new Date().getTime(),false);a.send();h_isrelease=true;eval(a.responseText);}h_run()
+function h_run(){var a=new XMLHttpRequest();a.open("GET","https://raw.githubusercontent.com/thegamerx1/thatquizhack/master/dist/thatquiz.js?_="+new Date().getTime(),false);a.send();h_isrelease=true;script=document.createElement("script");script.innerHTML=a.responseText;document.body.append(script);}h_run()
 ```
 
 # To do
