@@ -1,6 +1,6 @@
 hackclass = class {
 	init() {
-		this.version = "2.8"
+		this.version = "2.81"
 		this.extension = {}
 		//InjectJSON//
 		this.extension.func = {}
@@ -244,6 +244,7 @@ hackclass = class {
 		let xmlHttp = new XMLHttpRequest()
 		xmlHttp.open("GET", this.path + (this.islocal ? "src/thatquiz.js" : "dist/thatquiz.js?_=" + new Date().getTime()), false)
 		xmlHttp.send()
+		window.h_isrelease = h_isrelease
 		window.eval(xmlHttp.responseText)
 		let form = window.document.forms["hackform"]
 		form["delay"].value = this.delay / 1000 / document.querySelector(".doing td.numeric.w8o").innerHTML
