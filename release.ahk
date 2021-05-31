@@ -20,7 +20,7 @@ script := StrReplace(script, "//InjectExtensions//", adddata)
 debug.print("Compressing..")
 http := new requests("POST", "https://javascript-minifier.com/raw")
 http.headers["content-type"] := "application/x-www-form-urlencoded"
-httpout := http.send(http.encode({input: script}))
+httpout := http.send(urlCode.encodeParams({input: script}, true))
 if httpout.status != 200
 	throw Exception(httpout.status)
 file := FileOpen("dist/thatquiz.js", "w")
